@@ -60,7 +60,18 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
     `field--field-galeria` a `menu--main`.
   - **Pozor v Twigu:** `node.field_x.entity` je pravdivé aj pri prázdnom poli. Na kontrolu používať
     `not node.field_x.isEmpty`.
-  - Logo `images/logo.svg` je petrolejka s plameňom.
+  - Logo v téme: `images/logo.svg` (= `assets/logo/petrolejka-icon-color.svg`), `logo-inverse.svg` v päte,
+    `favicon.svg` (nastavené v `petrolejka.settings`). Nápis v hlavičke je HTML: `<span class="brand__petro">Petro</span>lejka`
+    (Fraunces 800 / 300).
+
+## Logo (`assets/logo/`)
+
+- Zvolený variant A: lampa (nádržka, horák, sklenený cylinder so žiarou, žltý plameň) a nápis „**Petro**lejka“.
+  „Petro“ je hrubým Fraunces (800) v modrej, „lejka“ tenkým (300) v tmavomodrej. Na tmavom pozadí je „Petro“
+  žlté a „lejka“ biele. **Petro = slangový názov Liptovského Petra**, preto je zvýraznené. Bez podnadpisu.
+- Verzie: `logo-horizontal`, `logo-stacked`, `icon` (vždy `-color` / `-inverse`), `icon-badge` (kruh). PNG v `png/`.
+- Generuje ich `scripts/make-logo.py` (fonttools + resvg-py vo venv, font Fraunces z Google Fonts). Text je
+  prevedený na krivky.
 
 ## Skripty (`scripts/`)
 

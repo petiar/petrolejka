@@ -1,0 +1,4 @@
+favicon:
+  use_default: false
+  path: themes/custom/petrolejka/images/favicon.svg
+  mimetype: image/svg+xml

@@ -1,8 +1,8 @@
 global:
-  version: 1.0
+  version: 1.1
   css:
     base:
-      'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap': { type: external, minified: true }
+      'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700;9..144,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap': { type: external, minified: true }
     theme:
       css/style.css: {}
   js:

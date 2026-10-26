@@ -123,14 +123,16 @@ h1, h2, h3, h4 {
   text-decoration: none;
   color: var(--blue-900);
 }
-.brand__logo { width: 44px; height: 44px; }
+.brand__logo { width: 48px; height: 48px; }
 .brand__text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand__name {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: 1.7rem;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  color: var(--blue-900);
 }
+.brand__petro { font-weight: 800; color: var(--blue-700); }
 .brand__slogan { font-size: 0.8rem; color: var(--ink-soft); }
 @media (max-width: 480px) { .brand__slogan { display: none; } }
 
@@ -611,7 +613,8 @@ body:not(.path-frontpage) .site-main { margin-top: 7px; }
 }
 @media (min-width: 860px) { .site-footer__inner { grid-template-columns: 1fr 1fr; } }
 .brand--footer { color: var(--white); margin-bottom: 0.75rem; }
-.brand--footer .brand__logo { background: var(--white); border-radius: 50%; padding: 4px; }
+.brand--footer .brand__name { color: var(--white); }
+.brand--footer .brand__petro { color: var(--yellow-500); }
 .site-footer .menu { list-style: none; padding: 0; margin: 0; columns: 2; }
 .site-footer .menu a { color: var(--white); text-decoration: none; line-height: 2; }
 .site-footer .menu a:hover { text-decoration: underline; }

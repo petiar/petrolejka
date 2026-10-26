@@ -11,7 +11,8 @@
     <a class="brand" href="{{ path('<front>') }}" rel="home">
       <img class="brand__logo" src="{{ logo }}" alt="" width="48" height="48">
       <span class="brand__text">
-        <span class="brand__name">{{ site_name }}</span>
+        {# „Petro“ = slangový názov Liptovského Petra, preto je zvýraznené. #}
+        <span class="brand__name" aria-label="{{ site_name }}"><span class="brand__petro">Petro</span>lejka</span>
         <span class="brand__slogan">{{ site_slogan }}</span>
       </span>
     </a>
@@ -51,8 +52,8 @@
   <div class="site-footer__inner container">
     <div class="site-footer__about">
       <a class="brand brand--footer" href="{{ path('<front>') }}">
-        <img class="brand__logo" src="{{ logo }}" alt="" width="40" height="40">
-        <span class="brand__name">{{ site_name }}</span>
+        <img class="brand__logo" src="{{ logo_inverse }}" alt="" width="40" height="40">
+        <span class="brand__name" aria-label="{{ site_name }}"><span class="brand__petro">Petro</span>lejka</span>
       </a>
       <p>{{ 'Občianske združenie Petrolejka'|t }}<br>Nad ihriskom 178/19, 033 01 Liptovský Peter<br><a href="mailto:info@petrolejka.sk">info@petrolejka.sk</a></p>
     </div>

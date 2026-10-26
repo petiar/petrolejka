@@ -17,6 +17,7 @@ function petrolejka_preprocess_page(array &$variables): void {
   $variables['site_name'] = $config->get('name');
   $variables['site_slogan'] = $config->get('slogan');
   $variables['logo'] = base_path() . $theme_path . '/images/logo.svg';
+  $variables['logo_inverse'] = base_path() . $theme_path . '/images/logo-inverse.svg';
   $variables['hero_image'] = base_path() . $theme_path . '/images/hero.jpg';
   $variables['hero_credit'] = 'Foto: Patrik Kunec, CC BY-SA 4.0, Wikimedia Commons';
 }
