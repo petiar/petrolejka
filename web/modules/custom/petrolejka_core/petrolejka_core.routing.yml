@@ -1,0 +1,7 @@
+petrolejka_core.front:
+  path: '/uvod'
+  defaults:
+    _controller: '\Drupal\petrolejka_core\Controller\FrontController::build'
+    _title: 'Petrolejka'
+  requirements:
+    _permission: 'access content'

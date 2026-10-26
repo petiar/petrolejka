@@ -1,0 +1,21 @@
+uuid: 3f9b3117-1b05-496d-a12e-d0485bed0dae
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_datum
+    - node.type.podujatie
+  module:
+    - datetime_range
+id: node.podujatie.field_datum
+field_name: field_datum
+entity_type: node
+bundle: podujatie
+label: 'Dátum a čas'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

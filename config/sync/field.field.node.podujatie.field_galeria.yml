@@ -1,0 +1,38 @@
+uuid: 58b5fa4c-9416-4761-a091-b26cbd933bc9
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_galeria
+    - node.type.podujatie
+  module:
+    - image
+id: node.podujatie.field_galeria
+field_name: field_galeria
+entity_type: node
+bundle: podujatie
+label: 'Fotky z podujatia'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: 'galeria/[date:custom:Y]'
+  file_extensions: 'png jpg jpeg webp'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: null
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

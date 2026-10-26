@@ -1,0 +1,25 @@
+uuid: b7faf000-cc98-4dc6-b5df-8503cd9b89ce
+langcode: sk
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - petrolejka
+id: petrolejka_main_menu
+theme: petrolejka
+region: primary_menu
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: ''
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

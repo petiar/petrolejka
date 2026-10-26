@@ -1,0 +1,110 @@
+uuid: 8b91d110-0b51-4893-a3c4-6b757e12bc5a
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.field.node.podujatie.body
+    - field.field.node.podujatie.field_datum
+    - field.field.node.podujatie.field_galeria
+    - field.field.node.podujatie.field_image
+    - field.field.node.podujatie.field_miesto
+    - field.field.node.podujatie.field_registracia
+    - field.field.node.podujatie.field_typ_podujatia
+    - field.field.node.podujatie.field_vstupne
+    - image.style.wide
+    - node.type.podujatie
+  module:
+    - datetime_range
+    - image
+    - link
+    - text
+    - user
+id: node.podujatie.default
+targetEntityType: node
+bundle: podujatie
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_datum:
+    type: daterange_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+      from_to: both
+      separator: '-'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_galeria:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: wide
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: wide
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_miesto:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_registracia:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_typ_podujatia:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_vstupne:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

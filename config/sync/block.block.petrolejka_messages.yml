@@ -1,0 +1,20 @@
+uuid: 0e8b4d88-6ed6-4c00-b915-f73b4c8dffbd
+langcode: sk
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - petrolejka
+id: petrolejka_messages
+theme: petrolejka
+region: highlighted
+weight: 1
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: ''
+  label_display: '0'
+  provider: system
+visibility: {  }

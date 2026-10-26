@@ -1,0 +1,23 @@
+uuid: d4331960-f6bf-4936-914f-9f1bdcb21f00
+langcode: sk
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rubrika
+  module:
+    - taxonomy
+id: rubrika
+label: Rubrika
+type: 'canonical_entities:taxonomy_term'
+pattern: '/casopis/rubrika/[term:name]'
+selection_criteria:
+  8136c3f1-1f18-40d3-a189-42516ab92599:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      rubrika: rubrika
+selection_logic: and
+weight: 0
+relationships: {  }

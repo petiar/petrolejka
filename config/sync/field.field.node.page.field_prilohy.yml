@@ -1,0 +1,27 @@
+uuid: d39d9800-c960-4def-a6cb-6c4cd9742c40
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_prilohy
+    - node.type.page
+  module:
+    - file
+id: node.page.field_prilohy
+field_name: field_prilohy
+entity_type: node
+bundle: page
+label: 'Prílohy (dokumenty)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: dokumenty
+  file_extensions: 'pdf doc docx odt xls xlsx'
+  max_filesize: ''
+  description_field: true
+field_type: file

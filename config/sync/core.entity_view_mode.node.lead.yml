@@ -1,0 +1,11 @@
+uuid: 727c43e7-a1eb-4f61-8249-82b29ec66a7b
+langcode: sk
+status: true
+dependencies:
+  module:
+    - node
+id: node.lead
+label: 'Hlavný článok'
+description: null
+targetEntityType: node
+cache: true

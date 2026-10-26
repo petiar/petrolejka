@@ -1,0 +1,24 @@
+uuid: 1008c428-b1b1-451b-acea-ca185189b559
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_autor
+    - node.type.article
+    - node.type.osoba
+id: node.article.field_autor
+field_name: field_autor
+entity_type: node
+bundle: article
+label: Autor
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      osoba: osoba
+field_type: entity_reference

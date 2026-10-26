@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Petrolejka – jadro.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function petrolejka_core_theme(): array {
+  return [
+    'petrolejka_front' => [
+      'variables' => [
+        'lead' => NULL,
+        'articles' => [],
+        'events' => [],
+        'news' => [],
+      ],
+    ],
+  ];
+}

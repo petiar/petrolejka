@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Karta (teaser) pre články a ostatný obsah.
+ */
+#}
+<article{{ attributes.addClass('card', 'card--' ~ node.bundle|clean_class) }}>
+  {% if content.field_image|render|striptags('<img>')|trim %}
+    <a class="card__media" href="{{ url }}" tabindex="-1" aria-hidden="true">{{ content.field_image }}</a>
+  {% else %}
+    <a class="card__media card__media--empty" href="{{ url }}" tabindex="-1" aria-hidden="true"></a>
+  {% endif %}
+  <div class="card__body">
+    <p class="kicker">
+      {% if rubrika %}<span class="kicker__label">{{ rubrika }}</span>{% endif %}
+      {% if node.bundle == 'osoba' %}{{ content.field_rola }}{% else %}<time datetime="{{ date_iso }}">{{ date_human }}</time>{% endif %}
+    </p>
+    <h3{{ title_attributes.addClass('card__title') }}><a href="{{ url }}">{{ label }}</a></h3>
+    {% if content.field_perex|render|trim %}
+      <div class="card__text">{{ content.field_perex }}</div>
+    {% else %}
+      <div class="card__text">{{ content.body }}</div>
+    {% endif %}
+  </div>
+</article>

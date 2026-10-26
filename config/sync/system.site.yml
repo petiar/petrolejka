@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: ijfbzDTN4CbE7Sr-6ubWzy_t1vH4OtU1doNCLssVz-4
+langcode: sk
+uuid: dec4441b-d9cf-4d22-8a53-e20cff24a542
+name: Petrolejka
+mail: info@petrolejka.sk
+slogan: 'Komunitný časopis z Liptovského Petra'
+page:
+  403: ''
+  404: ''
+  front: /uvod
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: sk
+mail_notification: null

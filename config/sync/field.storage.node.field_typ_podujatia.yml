@@ -1,0 +1,20 @@
+uuid: a4076daa-9977-421a-be8c-1ba797984464
+langcode: sk
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_typ_podujatia
+field_name: field_typ_podujatia
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

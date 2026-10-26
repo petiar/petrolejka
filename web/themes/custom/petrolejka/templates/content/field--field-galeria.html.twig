@@ -1,0 +1,11 @@
+{#
+/**
+ * @file
+ * Fotogaléria.
+ */
+#}
+<div{{ attributes.addClass('gallery') }}>
+  {% for item in items %}
+    <figure class="gallery__item">{{ item.content }}</figure>
+  {% endfor %}
+</div>

@@ -1,0 +1,19 @@
+uuid: e33d0458-7c65-47df-aa6d-406528433f73
+langcode: sk
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_podujatie
+field_name: field_podujatie
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

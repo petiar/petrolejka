@@ -1,0 +1,9 @@
+uuid: 1c9e0270-d01e-46f9-a71c-3fe1869fa093
+langcode: sk
+status: true
+dependencies: {  }
+id: sk
+label: Slovenčina
+direction: ltr
+weight: 0
+locked: false

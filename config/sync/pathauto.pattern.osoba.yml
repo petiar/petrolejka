@@ -1,0 +1,23 @@
+uuid: 7fd4c18c-9dac-458b-b2aa-8d0d8078c607
+langcode: sk
+status: true
+dependencies:
+  config:
+    - node.type.osoba
+  module:
+    - node
+id: osoba
+label: Osoba
+type: 'canonical_entities:node'
+pattern: '/ludia/[node:title]'
+selection_criteria:
+  61128ac9-e01c-490e-9171-518645210a8e:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      osoba: osoba
+selection_logic: and
+weight: 0
+relationships: {  }

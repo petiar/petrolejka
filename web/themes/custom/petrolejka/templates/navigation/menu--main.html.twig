@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Hlavné menu.
+ */
+#}
+{% if items %}
+  <ul class="menu menu--main">
+    {% for item in items %}
+      <li class="menu__item{{ item.in_active_trail ? ' is-active' }}">
+        {{ link(item.title, item.url, {'class': ['menu__link']}) }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

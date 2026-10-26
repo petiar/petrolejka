@@ -1,0 +1,19 @@
+uuid: f972d778-28c8-44e4-85b1-04cadf4fbb9b
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_perex
+    - node.type.article
+id: node.article.field_perex
+field_name: field_perex
+entity_type: node
+bundle: article
+label: Perex
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

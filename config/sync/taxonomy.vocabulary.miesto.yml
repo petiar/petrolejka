@@ -1,0 +1,9 @@
+uuid: fe29f670-e4b1-4c53-a7c8-5da6f371aee4
+langcode: sk
+status: true
+dependencies: {  }
+name: Miesta
+vid: miesto
+description: null
+weight: 0
+new_revision: false

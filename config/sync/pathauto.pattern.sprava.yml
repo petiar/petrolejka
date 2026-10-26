@@ -1,0 +1,23 @@
+uuid: fa6e6629-6bce-43ff-8f7f-6684181955d5
+langcode: sk
+status: true
+dependencies:
+  config:
+    - node.type.sprava
+  module:
+    - node
+id: sprava
+label: Správa
+type: 'canonical_entities:node'
+pattern: '/dianie/[node:title]'
+selection_criteria:
+  a4041316-3789-4032-83cb-3b46a665f8e5:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      sprava: sprava
+selection_logic: and
+weight: 0
+relationships: {  }

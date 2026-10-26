@@ -1,0 +1,50 @@
+{#
+/**
+ * @file
+ * Článok – plné zobrazenie.
+ */
+#}
+<article{{ attributes.addClass('story') }}>
+  <header class="story__header">
+    <p class="kicker">
+      {% if rubrika %}<a class="kicker__label" href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': node.field_rubrika.target_id}) }}">{{ rubrika }}</a>{% endif %}
+      <time datetime="{{ date_iso }}">{{ date_human }}</time>
+      <span>· {{ reading_time }} min čítania</span>
+    </p>
+    <h1{{ title_attributes.addClass('story__title') }}>{{ label }}</h1>
+    <div class="story__perex">{{ content.field_perex }}</div>
+    {% if node.field_autor|length %}
+      <p class="story__byline">
+        {{ 'Text:'|t }}
+        {% for item in node.field_autor %}
+          {% if item.entity %}<a href="{{ path('entity.node.canonical', {'node': item.target_id}) }}">{{ item.entity.label }}</a>{{ not loop.last ? ', ' }}{% endif %}
+        {% endfor %}
+        {% if not node.field_cislo.isEmpty %} · <a href="{{ path('entity.node.canonical', {'node': node.field_cislo.target_id}) }}">{{ node.field_cislo.entity.label }}</a>{% endif %}
+      </p>
+    {% endif %}
+  </header>
+
+  {% if content.field_image|render|trim %}
+    <figure class="story__figure">
+      {{ content.field_image }}
+      {% if node.field_image.title %}<figcaption>{{ node.field_image.title }}</figcaption>{% endif %}
+    </figure>
+  {% endif %}
+
+  <div{{ content_attributes.addClass('story__body', 'prose') }}>
+    {{ content|without('field_image', 'field_perex', 'field_rubrika', 'field_autor', 'field_cislo', 'field_galeria', 'field_podujatie', 'links') }}
+  </div>
+
+  {% if content.field_galeria|render|trim %}
+    <section class="story__gallery">
+      <h2>{{ 'Fotogaléria'|t }}</h2>
+      {{ content.field_galeria }}
+    </section>
+  {% endif %}
+
+  {% if not node.field_podujatie.isEmpty %}
+    <aside class="story__related">
+      {{ 'Súvisiace podujatie:'|t }} <a href="{{ path('entity.node.canonical', {'node': node.field_podujatie.target_id}) }}">{{ node.field_podujatie.entity.label }}</a>
+    </aside>
+  {% endif %}
+</article>

@@ -1,0 +1,101 @@
+uuid: fd41c95c-276a-4057-8d8d-d86f3d36efec
+langcode: sk
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 0
+template: false
+archive: false
+id: prihlaska
+title: 'Prihláška za člena'
+description: null
+categories: {  }
+elements: |-
+  meno:
+    '#type': textfield
+    '#title': 'Meno a priezvisko / názov organizácie'
+    '#required': true
+  email:
+    '#type': email
+    '#title': 'E-mail'
+    '#required': true
+  telefon:
+    '#type': tel
+    '#title': 'Telefón'
+  adresa:
+    '#type': textfield
+    '#title': 'Adresa'
+  ako_pomoct:
+    '#type': checkboxes
+    '#title': 'S čím by ste chceli pomôcť?'
+    '#options':
+      clanky: 'Písanie článkov a fotenie'
+      podujatia: 'Organizovanie podujatí'
+      historia: 'Zbieranie histórie a starých fotografií'
+      technika: 'Technika, web, grafika'
+      ine: 'Niečo iné'
+  sprava:
+    '#type': textarea
+    '#title': 'Čo by ste nám chceli odkázať?'
+    '#rows': 4
+  suhlas:
+    '#type': checkbox
+    '#title': 'Súhlasím s cieľmi a stanovami združenia a so spracovaním osobných údajov na účely členstva.'
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  confirmation_type: inline
+  confirmation_message: 'Ďakujeme! Vašu žiadosť posúdi rada združenia a ozveme sa vám e-mailom.'
+  form_submit_label: 'Odoslať prihlášku'
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers: {  }
+variants: {  }

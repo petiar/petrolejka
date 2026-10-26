@@ -1,0 +1,18 @@
+uuid: a3562d31-6df9-4052-b227-6a04e6baa4b6
+langcode: sk
+status: true
+dependencies:
+  theme:
+    - petrolejka
+id: petrolejka_page_title
+theme: petrolejka
+region: content
+weight: 3
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: ''
+  label_display: '0'
+  provider: core
+visibility: {  }

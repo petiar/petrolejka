@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Hlavný článok na titulnej stránke.
+ */
+#}
+<article{{ attributes.addClass('lead-story') }}>
+  <a class="lead-story__media" href="{{ url }}" tabindex="-1" aria-hidden="true">{{ content.field_image }}</a>
+  <div class="lead-story__body">
+    <p class="kicker">
+      {% if rubrika %}<span class="kicker__label">{{ rubrika }}</span>{% endif %}
+      <time datetime="{{ date_iso }}">{{ date_human }}</time>
+    </p>
+    <h2{{ title_attributes.addClass('lead-story__title') }}><a href="{{ url }}">{{ label }}</a></h2>
+    <div class="lead-story__perex">{{ content.field_perex }}</div>
+    <a class="button button--primary" href="{{ url }}">{{ 'Čítať článok'|t }}</a>
+  </div>
+</article>

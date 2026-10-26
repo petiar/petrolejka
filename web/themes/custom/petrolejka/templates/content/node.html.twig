@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Všeobecné plné zobrazenie (stránky, správy, osoby, čísla časopisu).
+ */
+#}
+<article{{ attributes.addClass('story', 'story--' ~ node.bundle|clean_class) }}>
+  <header class="story__header">
+    {% if node.bundle == 'sprava' %}
+      <p class="kicker"><a class="kicker__label" href="{{ path('view.dianie.page_1') }}">{{ 'Dianie v obci'|t }}</a><time datetime="{{ date_iso }}">{{ date_human }}</time></p>
+    {% elseif node.bundle == 'cislo' %}
+      <p class="kicker"><a class="kicker__label" href="{{ path('view.cisla.page_1') }}">{{ 'Časopis'|t }}</a><time datetime="{{ date_iso }}">{{ date_human }}</time></p>
+    {% elseif node.bundle == 'osoba' %}
+      <p class="kicker">{{ content.field_rola }}</p>
+    {% endif %}
+    <h1{{ title_attributes.addClass('story__title') }}>{{ label }}</h1>
+  </header>
+
+  {% if content.field_image|render|trim %}
+    <figure class="story__figure{{ node.bundle == 'osoba' ? ' story__figure--portrait' }}">{{ content.field_image }}</figure>
+  {% endif %}
+
+  <div{{ content_attributes.addClass('story__body', 'prose') }}>
+    {{ content|without('field_image', 'field_rola', 'field_prilohy', 'field_zdroj', 'field_poradie', 'links') }}
+  </div>
+
+  {% if content.field_zdroj|render|trim %}
+    <p class="story__source">{{ 'Zdroj:'|t }} {{ content.field_zdroj }}</p>
+  {% endif %}
+
+  {% if content.field_prilohy|render|trim %}
+    <section class="documents">
+      <h2>{{ 'Dokumenty na stiahnutie'|t }}</h2>
+      {{ content.field_prilohy }}
+    </section>
+  {% endif %}
+</article>

@@ -1,0 +1,20 @@
+uuid: 6713e268-436c-4b53-8094-b43ec64d71cc
+langcode: sk
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_rubrika
+field_name: field_rubrika
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

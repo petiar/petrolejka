@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Podujatie – plné zobrazenie.
+ */
+#}
+<article{{ attributes.addClass('story', 'story--event') }}>
+  <header class="story__header">
+    <p class="kicker">
+      <a class="kicker__label" href="{{ path('view.podujatia.page_1') }}">{{ 'Podujatie'|t }}</a>
+      {% if not node.field_typ_podujatia.isEmpty %}<span>{{ node.field_typ_podujatia.entity.label }}</span>{% endif %}
+      {% if event.past %}<span class="tag tag--muted">{{ 'Už sa konalo'|t }}</span>{% endif %}
+    </p>
+    <h1{{ title_attributes.addClass('story__title') }}>{{ label }}</h1>
+  </header>
+
+  <dl class="facts">
+    <div class="facts__row"><dt>{{ 'Kedy'|t }}</dt><dd>{{ event.when }}</dd></div>
+    {% if not node.field_miesto.isEmpty %}<div class="facts__row"><dt>{{ 'Kde'|t }}</dt><dd>{{ node.field_miesto.entity.label }}</dd></div>{% endif %}
+    {% if node.field_vstupne.value %}<div class="facts__row"><dt>{{ 'Vstupné'|t }}</dt><dd>{{ node.field_vstupne.value }}</dd></div>{% endif %}
+    {% if content.field_registracia|render|trim %}<div class="facts__row"><dt>{{ 'Registrácia'|t }}</dt><dd>{{ content.field_registracia }}</dd></div>{% endif %}
+  </dl>
+
+  {% if content.field_image|render|trim %}
+    <figure class="story__figure">{{ content.field_image }}</figure>
+  {% endif %}
+
+  <div{{ content_attributes.addClass('story__body', 'prose') }}>
+    {{ content|without('field_image', 'field_datum', 'field_miesto', 'field_typ_podujatia', 'field_vstupne', 'field_registracia', 'field_galeria', 'links') }}
+  </div>
+
+  {% if content.field_galeria|render|trim %}
+    <section class="story__gallery">
+      <h2>{{ 'Fotky z podujatia'|t }}</h2>
+      {{ content.field_galeria }}
+    </section>
+  {% endif %}
+</article>

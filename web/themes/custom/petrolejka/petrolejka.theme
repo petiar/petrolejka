@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * @file
+ * Preprocess funkcie témy Petrolejka.
+ */
+
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function petrolejka_preprocess_page(array &$variables): void {
+  $config = \Drupal::config('system.site');
+  $theme_path = \Drupal::service('extension.list.theme')->getPath('petrolejka');
+  $variables['site_name'] = $config->get('name');
+  $variables['site_slogan'] = $config->get('slogan');
+  $variables['logo'] = base_path() . $theme_path . '/images/logo.svg';
+  $variables['hero_image'] = base_path() . $theme_path . '/images/hero.jpg';
+  $variables['hero_credit'] = 'Foto: Patrik Kunec, CC BY-SA 4.0, Wikimedia Commons';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page title.
+ */
+function petrolejka_preprocess_page_title(array &$variables): void {
+  // Uzly a titulná stránka si nadpis vykresľujú samy.
+  $route = \Drupal::routeMatch()->getRouteName();
+  if ($route === 'entity.node.canonical' || \Drupal::service('path.matcher')->isFrontPage()) {
+    $variables['title'] = NULL;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for node templates.
+ */
+function petrolejka_theme_suggestions_node_alter(array &$suggestions, array $variables): void {
+  // Všetky teasery bez vlastnej šablóny používajú spoločnú kartu.
+  if ($variables['elements']['#view_mode'] === 'teaser') {
+    array_splice($suggestions, 1, 0, ['node__teaser']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node templates.
+ */
+function petrolejka_preprocess_node(array &$variables): void {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+  $formatter = \Drupal::service('date.formatter');
+  $variables['date_human'] = $formatter->format($node->getCreatedTime(), 'custom', 'j. F Y');
+  $variables['date_iso'] = $formatter->format($node->getCreatedTime(), 'custom', 'c');
+
+  if ($node->bundle() === 'article') {
+    $words = str_word_count(strip_tags((string) $node->get('body')->value));
+    $variables['reading_time'] = max(1, (int) round($words / 200));
+    $variables['rubrika'] = $node->get('field_rubrika')->entity?->label();
+  }
+
+  if ($node->bundle() === 'podujatie' && !$node->get('field_datum')->isEmpty()) {
+    $variables['event'] = petrolejka_event_dates($node);
+  }
+}
+
+/**
+ * Pripraví ľudsky čitateľné údaje o termíne podujatia.
+ */
+function petrolejka_event_dates(NodeInterface $node): array {
+  $tz = date_default_timezone_get();
+  $item = $node->get('field_datum')->first();
+  /** @var \Drupal\Core\Datetime\DrupalDateTime $start */
+  $start = $item->start_date ?? NULL;
+  $end = $item->end_date ?? NULL;
+  if (!$start instanceof DrupalDateTime) {
+    return [];
+  }
+  $start->setTimezone(new \DateTimeZone($tz));
+  $end?->setTimezone(new \DateTimeZone($tz));
+  $formatter = \Drupal::service('date.formatter');
+  $ts = $start->getTimestamp();
+  $same_day = $end && $end->format('Y-m-d') === $start->format('Y-m-d');
+
+  $when = $formatter->format($ts, 'custom', 'l j. F Y, G.i');
+  if ($end && $same_day) {
+    $when .= ' – ' . $end->format('G.i');
+  }
+  elseif ($end) {
+    $when .= ' – ' . $formatter->format($end->getTimestamp(), 'custom', 'j. F Y, G.i');
+  }
+
+  return [
+    'day' => $start->format('j'),
+    'month' => $formatter->format($ts, 'custom', 'M'),
+    'weekday' => $formatter->format($ts, 'custom', 'l'),
+    'time' => $start->format('G.i'),
+    'when' => $when,
+    'iso' => $start->format('c'),
+    'past' => ($end ?? $start)->getTimestamp() < \Drupal::time()->getRequestTime(),
+  ];
+}

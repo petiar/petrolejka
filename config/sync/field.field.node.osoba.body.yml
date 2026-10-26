@@ -1,0 +1,24 @@
+uuid: 34133ae2-2032-4fa4-81b0-b306d6445c3e
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.osoba
+  module:
+    - text
+id: node.osoba.body
+field_name: body
+entity_type: node
+bundle: osoba
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

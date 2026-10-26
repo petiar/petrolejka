@@ -1,0 +1,70 @@
+{#
+/**
+ * @file
+ * Titulná stránka Petrolejky.
+ */
+#}
+<div class="front">
+  {% if lead %}
+    <section class="front__lead" aria-label="{{ 'Hlavný článok'|t }}">
+      {{ lead }}
+    </section>
+  {% endif %}
+
+  <div class="front__grid">
+    <section class="front__articles" aria-labelledby="front-articles">
+      <header class="section-head">
+        <h2 id="front-articles" class="section-head__title">{{ 'Z časopisu'|t }}</h2>
+        <a class="section-head__more" href="{{ path('view.casopis.page_1') }}">{{ 'Všetky články'|t }} →</a>
+      </header>
+      <div class="cards">
+        {% for item in articles %}
+          {{ item }}
+        {% endfor %}
+      </div>
+    </section>
+
+    <aside class="front__side">
+      <section class="panel panel--events" aria-labelledby="front-events">
+        <header class="section-head">
+          <h2 id="front-events" class="section-head__title">{{ 'Pripravujeme'|t }}</h2>
+          <a class="section-head__more" href="{{ path('view.podujatia.page_1') }}">{{ 'Kalendár'|t }} →</a>
+        </header>
+        {% if events|length %}
+          <div class="events">
+            {% for item in events %}
+              {{ item }}
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="muted">{{ 'Momentálne nemáme naplánované žiadne podujatia.'|t }}</p>
+        {% endif %}
+      </section>
+
+      <section class="panel panel--news" aria-labelledby="front-news">
+        <header class="section-head">
+          <h2 id="front-news" class="section-head__title">{{ 'Dianie v obci'|t }}</h2>
+          <a class="section-head__more" href="{{ path('view.dianie.page_1') }}">{{ 'Všetky správy'|t }} →</a>
+        </header>
+        <div class="news">
+          {% for item in news %}
+            {{ item }}
+          {% endfor %}
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <section class="front__join">
+    <div class="join">
+      <div class="join__text">
+        <h2>{{ 'Svetlo robíme spolu'|t }}</h2>
+        <p>{{ 'Napíšte článok, pomôžte s podujatím, podeľte sa o staré fotky alebo sa staňte členom združenia. Petrolejka je otvorená každému, komu záleží na Liptovskom Petri.'|t }}</p>
+      </div>
+      <div class="join__actions">
+        <a class="button button--primary" href="{{ url('<front>') }}zapoj-sa">{{ 'Zapojte sa'|t }}</a>
+        <a class="button" href="{{ url('<front>') }}podporte-nas">{{ 'Podporte nás'|t }}</a>
+      </div>
+    </div>
+  </section>
+</div>

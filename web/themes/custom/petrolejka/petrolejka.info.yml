@@ -1,0 +1,15 @@
+name: Petrolejka
+type: theme
+description: 'Jednoduchá časopisecká téma pre OZ Petrolejka. Farby obce Liptovský Peter – modrá, biela, žltá.'
+core_version_requirement: ^11
+base theme: false
+logo: images/logo.svg
+libraries:
+  - petrolejka/global
+regions:
+  header: 'Hlavička'
+  primary_menu: 'Hlavné menu'
+  highlighted: 'Zvýraznené'
+  breadcrumb: 'Omrvinky'
+  content: 'Obsah'
+  footer: 'Päta'

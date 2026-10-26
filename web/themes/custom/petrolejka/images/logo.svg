@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Petrolejka">
+  <path d="M32 9c-4 5.5-6.5 9.5-6.5 13.5a6.5 6.5 0 0 0 13 0C38.5 18.5 36 14.5 32 9z" fill="#f4c20d"/>
+  <path d="M32 16c-1.8 2.6-3 4.7-3 6.6a3 3 0 0 0 6 0c0-1.9-1.2-4-3-6.6z" fill="#fff6cf"/>
+  <path d="M24 31c-3 3-4.5 6.2-4.5 9.5C19.5 46 25 49 32 49s12.5-3 12.5-8.5c0-3.3-1.5-6.5-4.5-9.5" fill="none" stroke="#1d3f8f" stroke-width="3" stroke-linecap="round"/>
+  <path d="M26 30h12" stroke="#1d3f8f" stroke-width="3" stroke-linecap="round"/>
+  <path d="M16 53h32l-3-4H19z" fill="#1d3f8f"/>
+  <path d="M14 57h36" stroke="#1d3f8f" stroke-width="3" stroke-linecap="round"/>
+  <path d="M44.5 38c5 0 7.5 2.5 7.5 6s-2.5 6-6 6" fill="none" stroke="#1d3f8f" stroke-width="3" stroke-linecap="round"/>
+</svg>

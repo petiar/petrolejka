@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Podujatie v zozname.
+ */
+#}
+<article{{ attributes.addClass('event-item', event.past ? 'event-item--past') }}>
+  {% if event %}
+    <time class="date-badge" datetime="{{ event.iso }}">
+      <span class="date-badge__day">{{ event.day }}</span>
+      <span class="date-badge__month">{{ event.month }}</span>
+    </time>
+  {% endif %}
+  <div class="event-item__body">
+    <h3{{ title_attributes.addClass('event-item__title') }}><a href="{{ url }}">{{ label }}</a></h3>
+    <p class="event-item__meta">
+      {{ event.weekday }} o {{ event.time }}
+      {% if not node.field_miesto.isEmpty %} · {{ node.field_miesto.entity.label }}{% endif %}
+    </p>
+    {% if not node.field_typ_podujatia.isEmpty %}
+      <span class="tag">{{ node.field_typ_podujatia.entity.label }}</span>
+    {% endif %}
+  </div>
+</article>

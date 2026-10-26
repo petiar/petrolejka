@@ -1,0 +1,23 @@
+uuid: 8f866d50-7507-4b55-b408-bb7854fc9bc5
+langcode: sk
+status: true
+dependencies:
+  config:
+    - node.type.article
+  module:
+    - node
+id: clanok
+label: Článok
+type: 'canonical_entities:node'
+pattern: '/casopis/[node:title]'
+selection_criteria:
+  19c3191d-5432-47f9-ad76-d5c038dba4a0:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      article: article
+selection_logic: and
+weight: 0
+relationships: {  }

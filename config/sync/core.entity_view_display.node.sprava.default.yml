@@ -1,0 +1,43 @@
+uuid: 785492fd-3f39-453d-aef9-ea7764778b52
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.field.node.sprava.body
+    - field.field.node.sprava.field_zdroj
+    - node.type.sprava
+  module:
+    - link
+    - text
+    - user
+id: node.sprava.default
+targetEntityType: node
+bundle: sprava
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_zdroj:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

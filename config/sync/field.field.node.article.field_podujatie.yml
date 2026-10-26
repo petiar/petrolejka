@@ -1,0 +1,24 @@
+uuid: 12d9a839-5ef2-4f81-9275-246bfe08c682
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_podujatie
+    - node.type.article
+    - node.type.podujatie
+id: node.article.field_podujatie
+field_name: field_podujatie
+entity_type: node
+bundle: article
+label: 'Súvisiace podujatie'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      podujatie: podujatie
+field_type: entity_reference

@@ -1,0 +1,23 @@
+uuid: 09b27f8f-1c97-4ace-b889-125c79c43d85
+langcode: sk
+status: true
+dependencies:
+  config:
+    - node.type.page
+  module:
+    - node
+id: stranka
+label: Stránka
+type: 'canonical_entities:node'
+pattern: '/[node:title]'
+selection_criteria:
+  3d57bff1-dd65-4d55-afa3-4c325d2f814e:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      page: page
+selection_logic: and
+weight: 0
+relationships: {  }

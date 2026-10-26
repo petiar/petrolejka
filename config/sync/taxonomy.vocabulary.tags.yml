@@ -1,0 +1,11 @@
+uuid: 0822009c-9882-43fa-aa59-aa3ab67c7ebc
+langcode: sk
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: PWTsHiwkIfp5TW-iTBc9AhBtvbYY6wrp3MopazQ-95o
+name: Značky
+vid: tags
+description: 'Use tags to group content on similar topics into categories.'
+weight: 0
+new_revision: false

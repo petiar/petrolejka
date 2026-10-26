@@ -1,0 +1,24 @@
+uuid: cd86a3b1-ff82-4276-ab0c-2b50cd2ee031
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.cislo
+  module:
+    - text
+id: node.cislo.body
+field_name: body
+entity_type: node
+bundle: cislo
+label: Úvodník
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

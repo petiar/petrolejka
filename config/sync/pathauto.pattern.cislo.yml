@@ -1,0 +1,23 @@
+uuid: 9f6d2592-3184-4fc3-96c0-97b1f72ee170
+langcode: sk
+status: true
+dependencies:
+  config:
+    - node.type.cislo
+  module:
+    - node
+id: cislo
+label: 'Číslo časopisu'
+type: 'canonical_entities:node'
+pattern: '/casopis/cislo-[node:field_poradie]'
+selection_criteria:
+  84cfe001-17db-4dc5-a0c5-62f74f8320a0:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      cislo: cislo
+selection_logic: and
+weight: 0
+relationships: {  }

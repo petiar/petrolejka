@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Rozloženie stránky Petrolejky.
+ */
+#}
+<a href="#main" class="visually-hidden focusable skip-link">{{ 'Preskočiť na obsah'|t }}</a>
+
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a class="brand" href="{{ path('<front>') }}" rel="home">
+      <img class="brand__logo" src="{{ logo }}" alt="" width="48" height="48">
+      <span class="brand__text">
+        <span class="brand__name">{{ site_name }}</span>
+        <span class="brand__slogan">{{ site_slogan }}</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+      <span class="visually-hidden">{{ 'Menu'|t }}</span>
+    </button>
+
+    <nav id="primary-nav" class="primary-nav" aria-label="{{ 'Hlavné menu'|t }}">
+      {{ page.primary_menu }}
+    </nav>
+  </div>
+  {{ page.header }}
+</header>
+
+{% if is_front %}
+  <section class="hero" style="--hero-image: url('{{ hero_image }}')">
+    <div class="hero__inner container">
+      <p class="hero__kicker">{{ 'Liptovský Peter · nezávisle a s láskou'|t }}</p>
+      <h1 class="hero__title">{{ 'Svetlo na dianie v našej obci'|t }}</h1>
+      <p class="hero__lead">{{ 'Komunitný časopis, podujatia, história a ľudia Liptovského Petra – na jednom mieste.'|t }}</p>
+    </div>
+    <p class="hero__credit">{{ hero_credit }}</p>
+  </section>
+{% endif %}
+
+<main id="main" class="site-main" tabindex="-1">
+  <div class="container">
+    {{ page.highlighted }}
+    {{ page.breadcrumb }}
+    {{ page.content }}
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner container">
+    <div class="site-footer__about">
+      <a class="brand brand--footer" href="{{ path('<front>') }}">
+        <img class="brand__logo" src="{{ logo }}" alt="" width="40" height="40">
+        <span class="brand__name">{{ site_name }}</span>
+      </a>
+      <p>{{ 'Občianske združenie Petrolejka'|t }}<br>Nad ihriskom 178/19, 033 01 Liptovský Peter<br><a href="mailto:info@petrolejka.sk">info@petrolejka.sk</a></p>
+    </div>
+    <div class="site-footer__nav">
+      {{ page.footer }}
+    </div>
+    <p class="site-footer__disclaimer">
+      {{ 'Toto je nezávislá stránka občianskeho združenia. Nie je oficiálnou stránkou obce Liptovský Peter – úradné informácie zverejňuje obecný úrad.'|t }}
+      <a href="{{ path('<front>') }}fotografie">{{ 'Zdroje fotografií'|t }}</a>
+    </p>
+  </div>
+</footer>

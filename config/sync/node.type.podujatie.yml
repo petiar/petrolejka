@@ -1,0 +1,11 @@
+uuid: 725ec2b2-f351-496e-b7a1-aa29bb7e08bd
+langcode: sk
+status: true
+dependencies: {  }
+name: Podujatie
+type: podujatie
+description: 'Kultúrne, spoločenské a komunitné podujatia.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

@@ -1,0 +1,11 @@
+uuid: 60d8eaac-4ffd-4232-8fc4-1b1a7f55e4a2
+langcode: sk
+status: true
+dependencies: {  }
+name: 'Správa z obce'
+type: sprava
+description: 'Krátka správa o dianí v obci.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

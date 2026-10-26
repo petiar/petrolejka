@@ -1,0 +1,20 @@
+uuid: 8df6b94f-7b95-4098-acf2-236e5136c04b
+langcode: sk
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_miesto
+field_name: field_miesto
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

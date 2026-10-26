@@ -1,0 +1,23 @@
+uuid: cb4cbe41-d7b3-4385-8d6c-d92cdc255072
+langcode: sk
+status: true
+dependencies:
+  config:
+    - node.type.podujatie
+  module:
+    - node
+id: podujatie
+label: Podujatie
+type: 'canonical_entities:node'
+pattern: '/podujatia/[node:title]'
+selection_criteria:
+  dd8eac7c-ee08-49af-897f-694e956fe3b9:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      podujatie: podujatie
+selection_logic: and
+weight: 0
+relationships: {  }

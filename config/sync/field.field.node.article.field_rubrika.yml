@@ -1,0 +1,25 @@
+uuid: 0c276c9b-375f-4f8e-a5ae-f3b479a8196c
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_rubrika
+    - node.type.article
+    - taxonomy.vocabulary.rubrika
+id: node.article.field_rubrika
+field_name: field_rubrika
+entity_type: node
+bundle: article
+label: Rubrika
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      rubrika: rubrika
+    auto_create: true
+field_type: entity_reference

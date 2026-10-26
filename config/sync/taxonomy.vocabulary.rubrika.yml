@@ -1,0 +1,9 @@
+uuid: ba53b24c-1894-48f4-a2df-d1b54a5650ef
+langcode: sk
+status: true
+dependencies: {  }
+name: Rubriky
+vid: rubrika
+description: null
+weight: 0
+new_revision: false

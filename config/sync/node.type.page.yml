@@ -1,0 +1,11 @@
+uuid: b49932c5-0afe-4a7c-a299-57bdef922a8a
+langcode: sk
+status: true
+dependencies: {  }
+name: Stránka
+type: page
+description: 'Statické stránky (O nás, Podporte nás…).'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

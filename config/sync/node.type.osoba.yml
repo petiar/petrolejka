@@ -1,0 +1,11 @@
+uuid: a85ed7b2-7c8b-491f-9f8e-93aa33a44dd7
+langcode: sk
+status: true
+dependencies: {  }
+name: Osoba
+type: osoba
+description: 'Autori, členovia rady, dobrovoľníci.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

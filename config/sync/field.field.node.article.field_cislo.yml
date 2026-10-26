@@ -1,0 +1,24 @@
+uuid: d0ccb138-1b31-42fa-ab30-75c3829be4f9
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cislo
+    - node.type.article
+    - node.type.cislo
+id: node.article.field_cislo
+field_name: field_cislo
+entity_type: node
+bundle: article
+label: 'Číslo časopisu'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      cislo: cislo
+field_type: entity_reference

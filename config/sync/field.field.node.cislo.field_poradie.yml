@@ -1,0 +1,23 @@
+uuid: 27121996-82ee-4ae5-9bca-82cded61b4c7
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_poradie
+    - node.type.cislo
+id: node.cislo.field_poradie
+field_name: field_poradie
+entity_type: node
+bundle: cislo
+label: 'Poradové číslo'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

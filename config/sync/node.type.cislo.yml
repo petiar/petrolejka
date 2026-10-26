@@ -1,0 +1,11 @@
+uuid: 27f23cb7-96c8-46dc-8e1a-7a56e4b1564e
+langcode: sk
+status: true
+dependencies: {  }
+name: 'Číslo časopisu'
+type: cislo
+description: 'Vydanie občasného internetového časopisu.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

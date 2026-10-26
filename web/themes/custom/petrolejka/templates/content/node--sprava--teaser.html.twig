@@ -1,0 +1,10 @@
+{#
+/**
+ * @file
+ * Krátka správa z obce v zozname.
+ */
+#}
+<article{{ attributes.addClass('news-item') }}>
+  <time class="news-item__date" datetime="{{ date_iso }}">{{ date_human }}</time>
+  <h3{{ title_attributes.addClass('news-item__title') }}><a href="{{ url }}">{{ label }}</a></h3>
+</article>

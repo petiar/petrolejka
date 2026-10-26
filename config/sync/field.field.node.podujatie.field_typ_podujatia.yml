@@ -1,0 +1,25 @@
+uuid: ff00bcae-3578-4523-a8d6-ccf47cfd4055
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_typ_podujatia
+    - node.type.podujatie
+    - taxonomy.vocabulary.typ_podujatia
+id: node.podujatie.field_typ_podujatia
+field_name: field_typ_podujatia
+entity_type: node
+bundle: podujatie
+label: 'Typ podujatia'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      typ_podujatia: typ_podujatia
+    auto_create: true
+field_type: entity_reference

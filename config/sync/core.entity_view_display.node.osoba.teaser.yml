@@ -1,0 +1,55 @@
+uuid: 891036b1-9e54-43d8-81c9-06700b932aad
+langcode: sk
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.osoba.body
+    - field.field.node.osoba.field_image
+    - field.field.node.osoba.field_rola
+    - image.style.max_650x650
+    - node.type.osoba
+  module:
+    - image
+    - text
+    - user
+id: node.osoba.teaser
+targetEntityType: node
+bundle: osoba
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: max_650x650
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_rola:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

@@ -1,0 +1,62 @@
+uuid: 202ef743-db25-4dcb-8a03-707bdf87a60e
+langcode: sk
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.article.body
+    - field.field.node.article.field_autor
+    - field.field.node.article.field_cislo
+    - field.field.node.article.field_galeria
+    - field.field.node.article.field_image
+    - field.field.node.article.field_perex
+    - field.field.node.article.field_podujatie
+    - field.field.node.article.field_rubrika
+    - image.style.max_650x650
+    - node.type.article
+  module:
+    - image
+    - user
+id: node.article.teaser
+targetEntityType: node
+bundle: article
+mode: teaser
+content:
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: max_650x650
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_perex:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_rubrika:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  field_autor: true
+  field_cislo: true
+  field_galeria: true
+  field_podujatie: true
+  langcode: true

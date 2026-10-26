@@ -1,0 +1,23 @@
+uuid: 8cfbdad5-cdfd-467e-8370-5cbd320a2dd0
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_registracia
+    - node.type.podujatie
+  module:
+    - link
+id: node.podujatie.field_registracia
+field_name: field_registracia
+entity_type: node
+bundle: podujatie
+label: Registrácia
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 16
+field_type: link

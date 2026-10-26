@@ -1,0 +1,9 @@
+uuid: 02c5870e-df7a-4dd6-a488-88170c064cc9
+langcode: sk
+status: true
+dependencies: {  }
+name: 'Typy podujatí'
+vid: typ_podujatia
+description: null
+weight: 0
+new_revision: false

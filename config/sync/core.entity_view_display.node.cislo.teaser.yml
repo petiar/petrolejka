@@ -1,0 +1,47 @@
+uuid: 1cb7e653-3fd4-4137-94ad-1605b6a8f0a9
+langcode: sk
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.cislo.body
+    - field.field.node.cislo.field_image
+    - field.field.node.cislo.field_poradie
+    - image.style.max_650x650
+    - node.type.cislo
+  module:
+    - image
+    - text
+    - user
+id: node.cislo.teaser
+targetEntityType: node
+bundle: cislo
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: max_650x650
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_poradie: true
+  langcode: true

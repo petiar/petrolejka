@@ -1,0 +1,13 @@
+uuid: 23a1e302-5868-458c-9a01-3858f550646b
+langcode: sk
+status: false
+dependencies:
+  module:
+    - user
+_core:
+  default_config_hash: ZbXunWS_xAvMZXFfinyvClDAb_RCVLt7gAzE3v16E-Q
+id: user.full
+label: 'Používateľský účet'
+description: ''
+targetEntityType: user
+cache: true

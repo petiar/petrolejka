@@ -1,0 +1,13 @@
+uuid: 297beb20-7a89-4b0b-9af0-6cb71f8f0bc9
+langcode: sk
+status: false
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: dTfAUHooYV0uOVPO3saGpgv-c5PppJXDwxvwRTJOycM
+id: media.full
+label: 'Celý obsah'
+description: ''
+targetEntityType: media
+cache: true
