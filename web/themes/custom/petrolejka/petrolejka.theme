@@ -34,6 +34,22 @@ function petrolejka_asset_url(string $path): string {
 }
 
 /**
+ * Implements hook_page_attachments_alter().
+ */
+function petrolejka_page_attachments_alter(array &$attachments): void {
+  // Safari a iOS SVG favicon nepoužívajú, preto pridávame ICO a PNG.
+  $theme_path = \Drupal::service('extension.list.theme')->getPath('petrolejka');
+  $links = [
+    'petrolejka_favicon_ico' => ['rel' => 'icon', 'href' => petrolejka_asset_url('favicon.ico'), 'sizes' => '32x32'],
+    'petrolejka_favicon_png' => ['rel' => 'icon', 'type' => 'image/png', 'sizes' => '192x192', 'href' => petrolejka_asset_url($theme_path . '/images/petrolejka-icon-192.png')],
+    'petrolejka_apple_touch' => ['rel' => 'apple-touch-icon', 'href' => petrolejka_asset_url($theme_path . '/images/petrolejka-apple-touch-icon.png')],
+  ];
+  foreach ($links as $key => $attributes) {
+    $attachments['#attached']['html_head_link'][] = [$attributes, FALSE];
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for page title.
  */
 function petrolejka_preprocess_page_title(array &$variables): void {
