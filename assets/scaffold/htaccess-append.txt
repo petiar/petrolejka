@@ -1,0 +1,5 @@
+
+# Petrolejka: AVIF derivácie obrázkov (napr. foto.jpg.avif). Bez tohto
+# Apache na Websupporte posiela image/jpeg a prehliadač kvôli nosniff
+# obrázok nezobrazí.
+AddType image/avif .avif
