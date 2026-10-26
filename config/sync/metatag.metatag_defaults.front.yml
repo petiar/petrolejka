@@ -9,3 +9,5 @@ label: 'Titulná stránka'
 tags:
   canonical_url: '[site:url]'
   shortlink: '[site:url]'
+  title: '[site:name] – [site:slogan]'
+  description: 'Komunitný časopis, podujatia, história a ľudia Liptovského Petra. Nezávislá stránka občianskeho združenia Petrolejka.'

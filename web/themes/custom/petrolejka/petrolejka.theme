@@ -16,10 +16,21 @@ function petrolejka_preprocess_page(array &$variables): void {
   $theme_path = \Drupal::service('extension.list.theme')->getPath('petrolejka');
   $variables['site_name'] = $config->get('name');
   $variables['site_slogan'] = $config->get('slogan');
-  $variables['logo'] = base_path() . $theme_path . '/images/logo.svg';
-  $variables['logo_inverse'] = base_path() . $theme_path . '/images/logo-inverse.svg';
+  $variables['logo'] = petrolejka_asset_url($theme_path . '/images/logo.svg');
+  $variables['logo_inverse'] = petrolejka_asset_url($theme_path . '/images/logo-inverse.svg');
   $variables['hero_image'] = base_path() . $theme_path . '/images/hero.jpg';
   $variables['hero_credit'] = 'Foto: Patrik Kunec, CC BY-SA 4.0, Wikimedia Commons';
+}
+
+/**
+ * URL súboru témy s verziou podľa obsahu.
+ *
+ * Proxy na Websupporte kešuje statické súbory rok, takže zmenený súbor
+ * musí dostať novú adresu.
+ */
+function petrolejka_asset_url(string $path): string {
+  $hash = @md5_file(DRUPAL_ROOT . '/' . $path);
+  return base_path() . $path . ($hash ? '?v=' . substr($hash, 0, 8) : '');
 }
 
 /**

@@ -61,7 +61,8 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
   - **Pozor v Twigu:** `node.field_x.entity` je pravdivé aj pri prázdnom poli. Na kontrolu používať
     `not node.field_x.isEmpty`.
   - Logo v téme: `images/logo.svg` (= `assets/logo/petrolejka-icon-color.svg`), `logo-inverse.svg` v päte,
-    `favicon.svg` (nastavené v `petrolejka.settings`). Nápis v hlavičke je HTML: `<span class="brand__petro">Petro</span>lejka`
+    `petrolejka-favicon.svg` (nastavené v `petrolejka.settings`). URL loga majú `?v=<hash obsahu>`
+    (`petrolejka_asset_url()`), aby ich proxy nekešovala. Pri zmene faviconu súbor premenovať. Nápis v hlavičke je HTML: `<span class="brand__petro">Petro</span>lejka`
     (Fraunces 800 / 300).
 
 ## Logo (`assets/logo/`)
@@ -116,8 +117,9 @@ na `/fotografie`.
   `image/jpeg` a kvôli `nosniff` sa obrázky nezobrazovali. Opravené pripojením `AddType image/avif .avif`
   do `.htaccess` cez composer scaffold (`assets/scaffold/htaccess-append.txt`, `extra.drupal-scaffold.file-mapping`
   v composer.json). `web/.htaccess` neupravovať ručne, prepíše sa.
-- Pred serverom je proxy (openresty), ktorá kešuje statické súbory (`max-age` 1 rok).
-- Titulok titulky je zatiaľ „Petrolejka | Petrolejka“, treba doladiť cez metatag.
+- Pred serverom je proxy (openresty), ktorá kešuje statické súbory (`max-age` 1 rok). Zmenený súbor na tej istej
+  URL sa návštevníkom neukáže, treba zmeniť URL (query `?v=`, nový názov). CSS/JS cez libraries to riešia samé.
+- Titulok a description titulky sú nastavené v `metatag.metatag_defaults.front`.
 
 ## Otvorené / TODO
 - Heslo admina na produkcii bolo po prenose `admin`. Používateľ ho mal zmeniť, over to.
