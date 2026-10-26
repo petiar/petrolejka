@@ -9,3 +9,7 @@
 /web/sites/*/settings.local.php
 /.idea/
 .DS_Store
+
+# Priečinky hostingu Websupport na serveri.
+/logs/
+/sub/
