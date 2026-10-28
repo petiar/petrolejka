@@ -20,3 +20,11 @@ petrolejka_core.podcast_settings:
     _title: 'Podcast'
   requirements:
     _permission: 'administer petrolejka podcast'
+
+petrolejka_core.donation_settings:
+  path: '/admin/config/services/darovanie'
+  defaults:
+    _form: '\Drupal\petrolejka_core\Form\DonationSettingsForm'
+    _title: 'Darovanie (PAY by square)'
+  requirements:
+    _permission: 'administer petrolejka donation'

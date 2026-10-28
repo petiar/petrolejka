@@ -3,3 +3,7 @@
 # Apache na Websupporte posiela image/jpeg a prehliadač kvôli nosniff
 # obrázok nezobrazí.
 AddType image/avif .avif
+
+# Petrolejka: ES moduly (js/vendor/*.mjs). Prehliadač modul s iným typom
+# (napr. application/octet-stream) odmietne načítať.
+AddType text/javascript .mjs

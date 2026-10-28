@@ -23,6 +23,15 @@ function petrolejka_core_theme(): array {
         'news' => [],
       ],
     ],
+    'petrolejka_donation' => [
+      'variables' => [
+        'intro' => NULL,
+        'amounts' => [],
+        'beneficiary' => NULL,
+        'iban_formatted' => NULL,
+        'variable_symbol' => NULL,
+      ],
+    ],
     'petrolejka_podcast_subscribe' => [
       'variables' => [
         'cover' => NULL,

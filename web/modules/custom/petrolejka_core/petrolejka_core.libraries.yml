@@ -1,0 +1,8 @@
+donation:
+  version: 1.0
+  js:
+    js/donation.js: { attributes: { type: module }, preprocess: false }
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once

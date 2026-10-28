@@ -3,3 +3,8 @@ petrolejka_core.podcast_settings:
   description: 'Názov, popis a obal podcastu, odkazy na Apple Podcasts a Spotify.'
   route_name: petrolejka_core.podcast_settings
   parent: system.admin_config_media
+petrolejka_core.donation_settings:
+  title: 'Darovanie (PAY by square)'
+  description: 'IBAN, príjemca, symboly a predvolené sumy pre QR platbu na stránke Zapoj sa.'
+  route_name: petrolejka_core.donation_settings
+  parent: system.admin_config_services

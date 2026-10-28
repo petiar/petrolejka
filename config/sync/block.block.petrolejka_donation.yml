@@ -1,0 +1,25 @@
+uuid: 21885343-dc5a-449c-8275-2c966f662d6b
+langcode: sk
+status: true
+dependencies:
+  module:
+    - petrolejka_core
+    - system
+  theme:
+    - petrolejka
+id: petrolejka_donation
+theme: petrolejka
+region: content
+weight: 10
+provider: null
+plugin: petrolejka_donation
+settings:
+  id: petrolejka_donation
+  label: 'Darovanie (PAY by square)'
+  label_display: '0'
+  provider: petrolejka_core
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /zapoj-sa

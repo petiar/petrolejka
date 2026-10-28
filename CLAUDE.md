@@ -61,8 +61,24 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 - Menu odkaz „Podcast“ v main menu (obsah, nie konfigurácia) vytvoril deploy hook
   `petrolejka_core_deploy_podcast_menu()` v `petrolejka_core.deploy.php`. Podobné jednorazové zmeny obsahu na
   produkcii robiť cez deploy hooky.
-- `web/.user.ini` zvyšuje limit nahrávania na 256 MB (na serveri bolo 2 MB). Ak by Websupport `.user.ini`
-  neakceptoval, limit sa nastavuje vo WebAdmine.
+- `web/.user.ini` zvyšuje limit nahrávania na 256 MB (na serveri bolo 2 MB). Websupport ho akceptuje (overené
+  28. 10. 2026 vo formulári).
+
+## Darovanie (PAY by square)
+
+- Blok `petrolejka_donation` (`DonationBlock`) je na stránke **/zapoj-sa** (región content, viditeľnosť podľa cesty,
+  config `block.block.petrolejka_donation`). Návštevník zvolí alebo zadá sumu (a voliteľne meno) a **QR kód sa
+  generuje v prehliadači** (`js/donation.js`, ES modul). Server nič neprijíma ani neukladá. Dá sa stiahnuť aj PNG
+  (banky vedia načítať QR z obrázka v galérii, SVG nie).
+- Knižnice sú vo `petrolejka_core/js/vendor/` (bysquare 4.1.0 ako samostatný ESM bundle z esm.sh, qrcode-generator
+  2.0.4), bez npm/build kroku (pozri README tam). Na PHP sa nedalo spoľahnúť, lebo PAY by square potrebuje LZMA,
+  ktoré PHP natívne nemá. `encode()` sám odstraňuje diakritiku.
+- Nastavenia `/admin/config/services/darovanie` (oprávnenie `administer petrolejka donation`): IBAN (kontrola
+  mod 97), BIC, príjemca, VS, KS, správa, predvolené sumy, úvodný text. Ukladajú sa v **State API**
+  (`DonationSettings`), deploy ich neprepíše. **Kým nie je vyplnený IBAN, blok sa nezobrazí.**
+- Apache na Websupporte nepozná `.mjs`. `AddType text/javascript .mjs` je v `assets/scaffold/htaccess-append.txt`.
+- Pri zmene `donation.js` zvýšiť `version` v `petrolejka_core.libraries.yml` (URL `?v=` kvôli proxy cache), pri
+  aktualizácii vendor knižníc zmeniť verziu v názve súboru.
 
 ## Kód
 
@@ -145,7 +161,8 @@ na `/fotografie`.
 
 ## Otvorené / TODO
 - Odporúčaná zmena hesla k DB (bolo zdieľané v chate).
-- Na stránke „Podporte nás“ doplniť IBAN a údaje pre 2 % po registrácii združenia.
+- Po založení účtu vyplniť IBAN v /admin/config/services/darovanie (zapne QR darovanie na Zapoj sa) a doplniť
+  IBAN a údaje pre 2 % aj na stránke „Podporte nás“ (zatiaľ text „bude doplnený“).
 - Ukážkový obsah (označený „Toto je ukážkový text…“) nahradiť skutočným.
 - Podcast: po prvej epizóde poslať feed do Apple Podcasts Connect a Spotify for Creators a URL doplniť v nastaveniach.
 - Headless screenshoty (Chrome/Docker) nie sú v tomto prostredí povolené. Vizuálne kontroly robí používateľ.

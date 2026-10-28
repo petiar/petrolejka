@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Formulár na finančnú podporu – QR kód generuje js/donation.js.
+ */
+#}
+<section class="donation" data-donation>
+  <h2 class="donation__title">{{ 'Podporte nás finančne'|t }}</h2>
+  {% if intro %}<p class="donation__intro">{{ intro }}</p>{% endif %}
+
+  <form class="donation__form" data-donation-form novalidate>
+    <fieldset class="donation__amounts">
+      <legend>{{ 'Suma'|t }}</legend>
+      {% for amount in amounts %}
+        <button type="button" class="donation__preset" data-amount="{{ amount }}">{{ amount|number_format(amount == amount|round ? 0 : 2, ',', ' ') }} €</button>
+      {% endfor %}
+      <label class="donation__custom">
+        <span class="visually-hidden">{{ 'Vlastná suma v eurách'|t }}</span>
+        <input type="number" name="amount" min="1" max="10000" step="0.01" inputmode="decimal" placeholder="{{ 'Iná suma'|t }}" data-donation-amount>
+        <span aria-hidden="true">€</span>
+      </label>
+    </fieldset>
+    <div class="form-item">
+      <label for="donation-name">{{ 'Vaše meno (nepovinné)'|t }}</label>
+      <input type="text" id="donation-name" name="name" maxlength="60" autocomplete="name" data-donation-name>
+    </div>
+    <p class="donation__error" role="alert" data-donation-error hidden></p>
+    <button type="submit" class="button button--primary">{{ 'Vytvoriť QR kód'|t }}</button>
+  </form>
+
+  <div class="donation__result" data-donation-result hidden>
+    <div class="donation__qr" data-donation-qr></div>
+    <div class="donation__details">
+      <p class="donation__scan">{{ 'Naskenujte QR kód v mobilnej aplikácii svojej banky (PAY by square).'|t }}</p>
+      <dl class="facts">
+        <div class="facts__row"><dt>{{ 'Suma'|t }}</dt><dd data-donation-out="amount"></dd></div>
+        <div class="facts__row"><dt>{{ 'Príjemca'|t }}</dt><dd>{{ beneficiary }}</dd></div>
+        <div class="facts__row"><dt>IBAN</dt><dd><span data-donation-iban>{{ iban_formatted }}</span> <button type="button" class="donation__copy" data-donation-copy>{{ 'Kopírovať'|t }}</button></dd></div>
+        {% if variable_symbol %}<div class="facts__row"><dt>{{ 'VS'|t }}</dt><dd>{{ variable_symbol }}</dd></div>{% endif %}
+        <div class="facts__row"><dt>{{ 'Správa'|t }}</dt><dd data-donation-out="note"></dd></div>
+      </dl>
+      <p class="donation__thanks">{{ 'Ďakujeme! Každé euro pomáha.'|t }}</p>
+      <a class="donation__download" href="#" download="petrolejka-platba.png" data-donation-download>{{ 'Stiahnuť QR kód'|t }}</a>
+      <p class="donation__hint">{{ 'Platíte z mobilu? Stiahnite si QR kód a v aplikácii banky ho načítajte z obrázka (galérie).'|t }}</p>
+    </div>
+  </div>
+</section>
