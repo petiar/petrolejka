@@ -1,13 +1,25 @@
 {#
 /**
  * @file
- * Formulár na finančnú podporu – QR kód generuje js/donation.js.
+ * Finančná podpora: Stripe (karta, Apple Pay, Google Pay) a doplnkovo
+ * bankový prevod s PAY by square QR kódom (generuje js/donation.js).
  */
 #}
+{% set stripe = stripe_once_url or stripe_monthly_url %}
 <section class="donation" data-donation>
   <h2 class="donation__title">{{ 'Podporte nás finančne'|t }}</h2>
   {% if intro %}<p class="donation__intro">{{ intro }}</p>{% endif %}
 
+  {% if stripe %}
+    <div class="donation__stripe">
+      {% if stripe_once_url %}<a class="button button--primary donation__stripe-button" href="{{ stripe_once_url }}">{{ 'Podporiť jednorazovo'|t }}</a>{% endif %}
+      {% if stripe_monthly_url %}<a class="button button--primary donation__stripe-button" href="{{ stripe_monthly_url }}">{{ 'Podporovať mesačne'|t }}</a>{% endif %}
+    </div>
+    <p class="donation__stripe-note">{{ 'Kartou, cez Apple Pay alebo Google Pay. Platbu bezpečne spracuje Stripe, mesačnú podporu môžete kedykoľvek zrušiť.'|t }}</p>
+  {% endif %}
+
+  {% if iban_formatted %}
+    {% set bank %}
   <form class="donation__form" data-donation-form novalidate>
     {% if monthly_day %}
       <fieldset class="donation__frequency">
@@ -53,4 +65,14 @@
       <p class="donation__hint">{{ 'Platíte z mobilu? Stiahnite si QR kód a v aplikácii banky ho načítajte z obrázka (galérie).'|t }}</p>
     </div>
   </div>
+    {% endset %}
+    {% if stripe %}
+      <details class="donation__bank">
+        <summary>{{ 'Radšej bankovým prevodom (bez poplatkov)'|t }}</summary>
+        {{ bank }}
+      </details>
+    {% else %}
+      {{ bank }}
+    {% endif %}
+  {% endif %}
 </section>

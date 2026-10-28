@@ -3,7 +3,7 @@
 namespace Drupal\petrolejka_core;
 
 /**
- * Nastavenia darovania cez PAY by square.
+ * Nastavenia darovania: Stripe Payment Links a bankový prevod (PAY by square).
  *
  * Rovnako ako PodcastSettings sú v State API, aby ich drush deploy
  * neprepisoval – spravujú sa na produkcii v administrácii.
@@ -13,6 +13,8 @@ class DonationSettings {
   const STATE_KEY = 'petrolejka_core.donation';
 
   const DEFAULTS = [
+    'stripe_once_url' => '',
+    'stripe_monthly_url' => '',
     'iban' => '',
     'bic' => '',
     'beneficiary' => 'Občianske združenie Petrolejka',
@@ -22,7 +24,7 @@ class DonationSettings {
     'amounts' => '10, 20, 50',
     'monthly' => TRUE,
     'monthly_day' => 15,
-    'intro' => 'Podporte činnosť združenia ľubovoľnou sumou. Zadajte sumu, naskenujte QR kód v aplikácii svojej banky a platbu potvrďte.',
+    'intro' => 'Podporte činnosť združenia jednorazovo alebo pravidelne. Každé euro pomáha.',
   ];
 
   /**

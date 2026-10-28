@@ -8,9 +8,10 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\petrolejka_core\DonationSettings;
 
 /**
- * Formulár na finančnú podporu s PAY by square QR kódom.
+ * Finančná podpora: tlačidlá na Stripe Payment Links a bankový prevod.
  *
- * QR kód sa generuje v prehliadači (js/donation.js), server nič neodosiela.
+ * Stripe rieši platbu kartou / Apple Pay / Google Pay na svojej stránke.
+ * PAY by square QR kód sa generuje v prehliadači (js/donation.js).
  */
 #[Block(
   id: 'petrolejka_donation',
@@ -24,13 +25,21 @@ class DonationBlock extends BlockBase {
   public function build(): array {
     $settings = DonationSettings::get();
     $cache = ['tags' => [DonationSettings::STATE_KEY]];
-    if ($settings['iban'] === '') {
+    if ($settings['iban'] === '' && $settings['stripe_once_url'] === '' && $settings['stripe_monthly_url'] === '') {
       return ['#cache' => $cache];
     }
-    $iban = $settings['iban'];
-    return [
+    $build = [
       '#theme' => 'petrolejka_donation',
+      '#stripe_once_url' => $settings['stripe_once_url'] ?: NULL,
+      '#stripe_monthly_url' => $settings['stripe_monthly_url'] ?: NULL,
       '#intro' => $settings['intro'],
+      '#cache' => $cache,
+    ];
+    $iban = $settings['iban'];
+    if ($iban === '') {
+      return $build;
+    }
+    return $build + [
       '#amounts' => DonationSettings::amounts(),
       '#beneficiary' => $settings['beneficiary'],
       '#iban_formatted' => trim(chunk_split($iban, 4, ' ')),
@@ -50,7 +59,6 @@ class DonationBlock extends BlockBase {
           ],
         ],
       ],
-      '#cache' => $cache,
     ];
   }
 

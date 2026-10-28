@@ -25,29 +25,50 @@ class DonationSettingsForm extends FormBase {
     $settings = DonationSettings::get();
 
     $form['info'] = [
-      '#markup' => '<p>' . $this->t('Z týchto údajov sa na stránke Zapoj sa vygeneruje PAY by square QR kód. Kým nie je vyplnený IBAN, formulár sa návštevníkom nezobrazí.') . '</p>',
+      '#markup' => '<p>' . $this->t('Darovací formulár je na stránkach Zapoj sa a Podporte nás. Zobrazí sa, keď je vyplnený aspoň jeden Stripe odkaz alebo IBAN.') . '</p>',
     ];
-    $form['iban'] = [
+    $form['stripe'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Stripe – karta, Apple Pay, Google Pay (hlavná možnosť)'),
+      '#description' => $this->t('V Stripe vytvorte Payment Links: jednorazový s možnosťou „zákazník si zvolí sumu“ a mesačný (predplatné). Vložte sem ich adresy (https://buy.stripe.com/…).'),
+      '#open' => TRUE,
+    ];
+    $form['stripe']['stripe_once_url'] = [
+      '#type' => 'url',
+      '#title' => $this->t('Odkaz na jednorazový dar'),
+      '#default_value' => $settings['stripe_once_url'],
+    ];
+    $form['stripe']['stripe_monthly_url'] = [
+      '#type' => 'url',
+      '#title' => $this->t('Odkaz na mesačný dar'),
+      '#default_value' => $settings['stripe_monthly_url'],
+    ];
+    $form['bank'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Bankový prevod – PAY by square QR kód (doplnková možnosť, bez poplatkov)'),
+      '#open' => TRUE,
+    ];
+    $form['bank']['iban'] = [
       '#type' => 'textfield',
       '#title' => $this->t('IBAN'),
       '#default_value' => $settings['iban'],
       '#placeholder' => 'SK00 0000 0000 0000 0000 0000',
     ];
-    $form['bic'] = [
+    $form['bank']['bic'] = [
       '#type' => 'textfield',
       '#title' => $this->t('BIC / SWIFT'),
       '#description' => $this->t('Nepovinné, slovenské banky ho nepotrebujú.'),
       '#default_value' => $settings['bic'],
       '#size' => 12,
     ];
-    $form['beneficiary'] = [
+    $form['bank']['beneficiary'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Názov príjemcu'),
       '#default_value' => $settings['beneficiary'],
       '#maxlength' => 70,
       '#required' => TRUE,
     ];
-    $form['variable_symbol'] = [
+    $form['bank']['variable_symbol'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Variabilný symbol'),
       '#description' => $this->t('Nepovinné, najviac 10 číslic. Hodí sa na odlíšenie darov od iných platieb.'),
@@ -55,7 +76,7 @@ class DonationSettingsForm extends FormBase {
       '#size' => 12,
       '#maxlength' => 10,
     ];
-    $form['constant_symbol'] = [
+    $form['bank']['constant_symbol'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Konštantný symbol'),
       '#description' => $this->t('Nepovinné, najviac 4 číslice.'),
@@ -63,25 +84,25 @@ class DonationSettingsForm extends FormBase {
       '#size' => 6,
       '#maxlength' => 4,
     ];
-    $form['note'] = [
+    $form['bank']['note'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Správa pre príjemcu'),
       '#description' => $this->t('Predvyplní sa v platbe. Ak darca zadá meno, pripojí sa za správu.'),
       '#default_value' => $settings['note'],
       '#maxlength' => 140,
     ];
-    $form['amounts'] = [
+    $form['bank']['amounts'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Predvolené sumy (€)'),
       '#description' => $this->t('Oddelené čiarkou, napr. 10, 20, 50. Darca môže zadať aj vlastnú sumu.'),
       '#default_value' => $settings['amounts'],
     ];
-    $form['monthly'] = [
+    $form['bank']['monthly'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Ponúknuť aj mesačnú podporu (trvalý príkaz)'),
       '#default_value' => $settings['monthly'],
     ];
-    $form['monthly_day'] = [
+    $form['bank']['monthly_day'] = [
       '#type' => 'number',
       '#title' => $this->t('Deň v mesiaci pre trvalý príkaz'),
       '#description' => $this->t('1 až 28, aby deň existoval v každom mesiaci.'),
@@ -112,6 +133,12 @@ class DonationSettingsForm extends FormBase {
     $bic = strtoupper(trim((string) $form_state->getValue('bic')));
     if ($bic !== '' && !preg_match('/^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/', $bic)) {
       $form_state->setErrorByName('bic', $this->t('BIC má 8 alebo 11 znakov, napr. TATRSKBX.'));
+    }
+    foreach (['stripe_once_url', 'stripe_monthly_url'] as $key) {
+      $url = trim((string) $form_state->getValue($key));
+      if ($url !== '' && !str_starts_with($url, 'https://')) {
+        $form_state->setErrorByName($key, $this->t('Odkaz musí začínať https://'));
+      }
     }
     foreach (['variable_symbol' => 10, 'constant_symbol' => 4] as $key => $max) {
       $value = trim((string) $form_state->getValue($key));

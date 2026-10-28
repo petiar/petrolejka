@@ -25,6 +25,8 @@ function petrolejka_core_theme(): array {
     ],
     'petrolejka_donation' => [
       'variables' => [
+        'stripe_once_url' => NULL,
+        'stripe_monthly_url' => NULL,
         'intro' => NULL,
         'amounts' => [],
         'beneficiary' => NULL,

@@ -64,7 +64,16 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 - `web/.user.ini` zvyšuje limit nahrávania na 256 MB (na serveri bolo 2 MB). Websupport ho akceptuje (overené
   28. 10. 2026 vo formulári).
 
-## Darovanie (PAY by square)
+## Darovanie (Stripe + PAY by square)
+
+- **Hlavná možnosť je Stripe** (karta, Apple Pay, Google Pay) cez **Stripe Payment Links**: tlačidlá „Podporiť
+  jednorazovo“ a „Podporovať mesačne“ vedú na odkazy `stripe_once_url` / `stripe_monthly_url` z nastavení. Na
+  webe nie je žiadna Stripe integrácia ani kľúče, platbu rieši stránka Stripe. Bankový prevod s QR je pod
+  `<details>` „Radšej bankovým prevodom (bez poplatkov)“. Bez Stripe odkazov sa QR časť zobrazí priamo.
+- Blok sa zobrazí, ak je vyplnený aspoň jeden Stripe odkaz alebo IBAN. JS (`donation`) sa pripája len pri IBAN.
+- PAY by square sa fotoaparátom telefónu nenačíta (iPhone ponúkne len „Search 0006…“), skenuje sa v bankovej
+  aplikácii. Alternatíva PayMe (payme.sk, platobný odkaz) bola zvážená, ale nepodporuje trvalé príkazy a
+  používateľ zvolil Stripe (28. 10. 2026).
 
 - Blok `petrolejka_donation` (`DonationBlock`) je na stránkach **/zapoj-sa** a **/podporte-nas** (región content, viditeľnosť podľa cesty,
   config `block.block.petrolejka_donation`). Návštevník zvolí alebo zadá sumu (a voliteľne meno) a **QR kód sa
@@ -79,7 +88,7 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 - Prepínač **Jednorazovo / Mesačne**: mesačne vytvorí trvalý príkaz (`PaymentOptions.StandingOrder` = 2,
   `periodicity` „m“, `day` z nastavení, `paymentDueDate` = najbližší taký deň, najskôr zajtra). Nie každá banka
   trvalý príkaz z QR vytvorí, preto je pod QR upozornenie. Obsah QR je v `data-payload` kontajnera (na kontrolu).
-- Nastavenia `/admin/config/services/darovanie` (oprávnenie `administer petrolejka donation`): IBAN (kontrola
+- Nastavenia `/admin/config/services/darovanie` (oprávnenie `administer petrolejka donation`): Stripe odkazy, IBAN (kontrola
   mod 97), BIC, príjemca, VS, KS, správa, predvolené sumy, mesačná podpora a jej deň (1–28, predvolene 15), úvodný text. Ukladajú sa v **State API**
   (`DonationSettings`), deploy ich neprepíše. **Kým nie je vyplnený IBAN, blok sa nezobrazí.**
 - Apache na Websupporte nepozná `.mjs`. `AddType text/javascript .mjs` je v `assets/scaffold/htaccess-append.txt`.
@@ -167,6 +176,8 @@ na `/fotografie`.
 
 ## Otvorené / TODO
 - Odporúčaná zmena hesla k DB (bolo zdieľané v chate).
+- Po registrácii OZ založiť Stripe účet, vytvoriť Payment Links (jednorazový s vlastnou sumou, mesačný) a vložiť
+  ich do /admin/config/services/darovanie.
 - Po založení účtu vyplniť IBAN v /admin/config/services/darovanie (zapne QR darovanie na Zapoj sa) a doplniť
   IBAN a údaje pre 2 % aj na stránke „Podporte nás“ (zatiaľ text „bude doplnený“).
 - Ukážkový obsah (označený „Toto je ukážkový text…“) nahradiť skutočným.
