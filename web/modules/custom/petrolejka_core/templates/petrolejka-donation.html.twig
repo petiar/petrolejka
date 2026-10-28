@@ -9,6 +9,13 @@
   {% if intro %}<p class="donation__intro">{{ intro }}</p>{% endif %}
 
   <form class="donation__form" data-donation-form novalidate>
+    {% if monthly_day %}
+      <fieldset class="donation__frequency">
+        <legend class="visually-hidden">{{ 'Ako často'|t }}</legend>
+        <label><input type="radio" name="frequency" value="once" checked data-donation-frequency> {{ 'Jednorazovo'|t }}</label>
+        <label><input type="radio" name="frequency" value="monthly" data-donation-frequency> {{ 'Mesačne'|t }}</label>
+      </fieldset>
+    {% endif %}
     <fieldset class="donation__amounts">
       <legend>{{ 'Suma'|t }}</legend>
       {% for amount in amounts %}
@@ -34,11 +41,13 @@
       <p class="donation__scan">{{ 'Naskenujte QR kód v mobilnej aplikácii svojej banky (PAY by square).'|t }}</p>
       <dl class="facts">
         <div class="facts__row"><dt>{{ 'Suma'|t }}</dt><dd data-donation-out="amount"></dd></div>
+        <div class="facts__row" data-donation-monthly-row hidden><dt>{{ 'Trvalý príkaz'|t }}</dt><dd data-donation-out="schedule"></dd></div>
         <div class="facts__row"><dt>{{ 'Príjemca'|t }}</dt><dd>{{ beneficiary }}</dd></div>
         <div class="facts__row"><dt>IBAN</dt><dd><span data-donation-iban>{{ iban_formatted }}</span> <button type="button" class="donation__copy" data-donation-copy>{{ 'Kopírovať'|t }}</button></dd></div>
         {% if variable_symbol %}<div class="facts__row"><dt>{{ 'VS'|t }}</dt><dd>{{ variable_symbol }}</dd></div>{% endif %}
         <div class="facts__row"><dt>{{ 'Správa'|t }}</dt><dd data-donation-out="note"></dd></div>
       </dl>
+      <p class="donation__hint" data-donation-monthly-row hidden>{{ 'Niektoré banky trvalý príkaz z QR kódu nevytvoria a načítajú ho ako jednorazovú platbu. Vtedy si trvalý príkaz nastavte v banke ručne podľa údajov vyššie.'|t }}</p>
       <p class="donation__thanks">{{ 'Ďakujeme! Každé euro pomáha.'|t }}</p>
       <a class="donation__download" href="#" download="petrolejka-platba.png" data-donation-download>{{ 'Stiahnuť QR kód'|t }}</a>
       <p class="donation__hint">{{ 'Platíte z mobilu? Stiahnite si QR kód a v aplikácii banky ho načítajte z obrázka (galérie).'|t }}</p>

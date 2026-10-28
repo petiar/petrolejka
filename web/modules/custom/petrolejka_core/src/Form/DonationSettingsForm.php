@@ -76,6 +76,20 @@ class DonationSettingsForm extends FormBase {
       '#description' => $this->t('Oddelené čiarkou, napr. 10, 20, 50. Darca môže zadať aj vlastnú sumu.'),
       '#default_value' => $settings['amounts'],
     ];
+    $form['monthly'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Ponúknuť aj mesačnú podporu (trvalý príkaz)'),
+      '#default_value' => $settings['monthly'],
+    ];
+    $form['monthly_day'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Deň v mesiaci pre trvalý príkaz'),
+      '#description' => $this->t('1 až 28, aby deň existoval v každom mesiaci.'),
+      '#default_value' => $settings['monthly_day'],
+      '#min' => 1,
+      '#max' => 28,
+      '#states' => ['visible' => [':input[name="monthly"]' => ['checked' => TRUE]]],
+    ];
     $form['intro'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Úvodný text nad formulárom'),
@@ -116,6 +130,8 @@ class DonationSettingsForm extends FormBase {
       $values[$key] = trim((string) $form_state->getValue($key));
     }
     $values['iban'] = strtoupper(preg_replace('/\s+/', '', $values['iban']));
+    $values['monthly'] = (bool) $form_state->getValue('monthly');
+    $values['monthly_day'] = min(28, max(1, (int) $form_state->getValue('monthly_day')));
     $values['bic'] = strtoupper($values['bic']);
     DonationSettings::set($values);
     $this->messenger()->addStatus($this->t('Nastavenia darovania sú uložené.'));

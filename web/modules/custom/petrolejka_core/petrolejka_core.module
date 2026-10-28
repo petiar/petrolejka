@@ -30,6 +30,7 @@ function petrolejka_core_theme(): array {
         'beneficiary' => NULL,
         'iban_formatted' => NULL,
         'variable_symbol' => NULL,
+        'monthly_day' => NULL,
       ],
     ],
     'petrolejka_podcast_subscribe' => [

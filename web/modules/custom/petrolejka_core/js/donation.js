@@ -5,17 +5,32 @@
  * Údaje o účte prichádzajú v drupalSettings.petrolejkaDonation (nastavenia
  * v /admin/config/services/darovanie). Nič sa neodosiela na server.
  */
-import { encode, PaymentOptions, CurrencyCode } from './vendor/bysquare-pay-4.1.0.mjs';
+import { encode, PaymentOptions, CurrencyCode, Periodicity } from './vendor/bysquare-pay-4.1.0.mjs';
 import qrcode from './vendor/qrcode-generator-2.0.4.mjs';
 
 const { Drupal, drupalSettings, once } = window;
 
 const formatAmount = (amount) => new Intl.NumberFormat('sk-SK', { style: 'currency', currency: 'EUR' }).format(amount);
 
-function buildPayment(config, amount, name) {
+/**
+ * Najbližší dátum s daným dňom v mesiaci, najskôr zajtra.
+ */
+function nextMonthlyDate(day) {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const date = new Date(tomorrow.getFullYear(), tomorrow.getMonth(), day);
+  if (date < new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate())) {
+    date.setMonth(date.getMonth() + 1);
+  }
+  return date;
+}
+
+const ymd = (d) => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+
+function buildPayment(config, amount, name, monthly) {
   const note = [config.note, name].filter(Boolean).join(' – ').slice(0, 140);
   const payment = {
-    type: PaymentOptions.PaymentOrder,
+    type: monthly ? PaymentOptions.StandingOrder : PaymentOptions.PaymentOrder,
     amount,
     currencyCode: CurrencyCode.EUR,
     paymentNote: note,
@@ -28,7 +43,15 @@ function buildPayment(config, amount, name) {
   if (config.constantSymbol) {
     payment.constantSymbol = config.constantSymbol;
   }
-  return { payment, note };
+  let firstDate = null;
+  if (monthly) {
+    // Trvalý príkaz: každý mesiac v nastavený deň, od najbližšieho takého dňa.
+    firstDate = nextMonthlyDate(config.monthlyDay);
+    payment.periodicity = Periodicity.Monthly;
+    payment.day = config.monthlyDay;
+    payment.paymentDueDate = ymd(firstDate);
+  }
+  return { payment, note, firstDate };
 }
 
 /**
@@ -42,6 +65,8 @@ function renderQr(container, data) {
   qr.addData(data);
   qr.make();
   container.innerHTML = qr.createSvgTag({ cellSize: 6, margin: 4, scalable: true });
+  // Obsah QR kódu (na kontrolu a testy).
+  container.dataset.payload = data;
   const svg = container.querySelector('svg');
   svg.setAttribute('role', 'img');
   svg.setAttribute('aria-label', Drupal.t('PAY by square QR kód pre platbu'));
@@ -100,7 +125,9 @@ function attach(root) {
 
     // Diakritiku zo správy odstráni encode() (predvolené deburr), lebo
     // banky ju nie vždy zvládnu.
-    const { payment, note } = buildPayment(config, amount, nameInput.value.trim());
+    const frequency = root.querySelector('[data-donation-frequency]:checked');
+    const monthly = Boolean(config.monthlyDay) && frequency?.value === 'monthly';
+    const { payment, note, firstDate } = buildPayment(config, amount, nameInput.value.trim(), monthly);
     let data;
     try {
       data = encode({ payments: [payment] });
@@ -112,8 +139,15 @@ function attach(root) {
     }
 
     const png = renderQr(root.querySelector('[data-donation-qr]'), data);
-    root.querySelector('[data-donation-out="amount"]').textContent = formatAmount(amount);
+    root.querySelector('[data-donation-out="amount"]').textContent = formatAmount(amount) + (monthly ? Drupal.t(' mesačne') : '');
     root.querySelector('[data-donation-out="note"]').textContent = note;
+    root.querySelectorAll('[data-donation-monthly-row]').forEach((el) => { el.hidden = !monthly; });
+    if (monthly) {
+      root.querySelector('[data-donation-out="schedule"]').textContent = Drupal.t('každý mesiac @day. dňa, prvá platba @date', {
+        '@day': config.monthlyDay,
+        '@date': firstDate.toLocaleDateString('sk-SK'),
+      });
+    }
     root.querySelector('[data-donation-download]').href = png;
     result.hidden = false;
     result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

@@ -20,6 +20,8 @@ class DonationSettings {
     'constant_symbol' => '',
     'note' => 'Dar pre OZ Petrolejka',
     'amounts' => '10, 20, 50',
+    'monthly' => TRUE,
+    'monthly_day' => 15,
     'intro' => 'Podporte činnosť združenia ľubovoľnou sumou. Zadajte sumu, naskenujte QR kód v aplikácii svojej banky a platbu potvrďte.',
   ];
 

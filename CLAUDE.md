@@ -73,8 +73,11 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 - Knižnice sú vo `petrolejka_core/js/vendor/` (bysquare 4.1.0 ako samostatný ESM bundle z esm.sh, qrcode-generator
   2.0.4), bez npm/build kroku (pozri README tam). Na PHP sa nedalo spoľahnúť, lebo PAY by square potrebuje LZMA,
   ktoré PHP natívne nemá. `encode()` sám odstraňuje diakritiku.
+- Prepínač **Jednorazovo / Mesačne**: mesačne vytvorí trvalý príkaz (`PaymentOptions.StandingOrder` = 2,
+  `periodicity` „m“, `day` z nastavení, `paymentDueDate` = najbližší taký deň, najskôr zajtra). Nie každá banka
+  trvalý príkaz z QR vytvorí, preto je pod QR upozornenie. Obsah QR je v `data-payload` kontajnera (na kontrolu).
 - Nastavenia `/admin/config/services/darovanie` (oprávnenie `administer petrolejka donation`): IBAN (kontrola
-  mod 97), BIC, príjemca, VS, KS, správa, predvolené sumy, úvodný text. Ukladajú sa v **State API**
+  mod 97), BIC, príjemca, VS, KS, správa, predvolené sumy, mesačná podpora a jej deň (1–28, predvolene 15), úvodný text. Ukladajú sa v **State API**
   (`DonationSettings`), deploy ich neprepíše. **Kým nie je vyplnený IBAN, blok sa nezobrazí.**
 - Apache na Websupporte nepozná `.mjs`. `AddType text/javascript .mjs` je v `assets/scaffold/htaccess-append.txt`.
 - Pri zmene `donation.js` zvýšiť `version` v `petrolejka_core.libraries.yml` (URL `?v=` kvôli proxy cache), pri

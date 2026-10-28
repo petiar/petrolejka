@@ -35,6 +35,7 @@ class DonationBlock extends BlockBase {
       '#beneficiary' => $settings['beneficiary'],
       '#iban_formatted' => trim(chunk_split($iban, 4, ' ')),
       '#variable_symbol' => $settings['variable_symbol'],
+      '#monthly_day' => $settings['monthly'] ? (int) $settings['monthly_day'] : NULL,
       '#attached' => [
         'library' => ['petrolejka_core/donation'],
         'drupalSettings' => [
@@ -45,6 +46,7 @@ class DonationBlock extends BlockBase {
             'variableSymbol' => $settings['variable_symbol'],
             'constantSymbol' => $settings['constant_symbol'],
             'note' => $settings['note'],
+            'monthlyDay' => $settings['monthly'] ? (int) $settings['monthly_day'] : NULL,
           ],
         ],
       ],

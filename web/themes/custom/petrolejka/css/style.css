@@ -745,3 +745,8 @@ body:not(.path-frontpage) .site-main { margin-top: 7px; }
 .donation__thanks { font-family: var(--font-serif); font-size: 1.2rem; color: var(--blue-900); margin: 0 0 0.5rem; }
 .donation__download { font-weight: 600; }
 .donation__hint { font-size: 0.9rem; color: var(--ink-soft); margin: 0.35rem 0 0; }
+.donation__frequency { border: 0; padding: 0; margin: 0 0 1rem; display: inline-flex; gap: 0.25rem; background: var(--paper); border-radius: 999px; padding: 0.25rem; }
+.donation__frequency label { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 1rem; border-radius: 999px; font-weight: 700; cursor: pointer; }
+.donation__frequency label:has(input:checked) { background: var(--blue-700); color: var(--white); }
+.donation__frequency input { accent-color: var(--yellow-500); }
+.donation [hidden] { display: none !important; }
