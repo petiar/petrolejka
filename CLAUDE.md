@@ -66,7 +66,7 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 
 ## Darovanie (PAY by square)
 
-- Blok `petrolejka_donation` (`DonationBlock`) je na stránke **/zapoj-sa** (región content, viditeľnosť podľa cesty,
+- Blok `petrolejka_donation` (`DonationBlock`) je na stránkach **/zapoj-sa** a **/podporte-nas** (región content, viditeľnosť podľa cesty,
   config `block.block.petrolejka_donation`). Návštevník zvolí alebo zadá sumu (a voliteľne meno) a **QR kód sa
   generuje v prehliadači** (`js/donation.js`, ES modul). Server nič neprijíma ani neukladá. Dá sa stiahnuť aj PNG
   (banky vedia načítať QR z obrázka v galérii, SVG nie).
