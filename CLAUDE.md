@@ -73,6 +73,9 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 - Knižnice sú vo `petrolejka_core/js/vendor/` (bysquare 4.1.0 ako samostatný ESM bundle z esm.sh, qrcode-generator
   2.0.4), bez npm/build kroku (pozri README tam). Na PHP sa nedalo spoľahnúť, lebo PAY by square potrebuje LZMA,
   ktoré PHP natívne nemá. `encode()` sám odstraňuje diakritiku.
+- **Verzia štandardu:** `encode()` sa volá s `version: 0` (1.0.0). Predvolená 1.2.0 z bysquare 4.x bankové aplikácie
+  nerozpoznali (QR sa vôbec nenačítal, 28. 10. 2026). Hlavička správneho kódu začína `00`. V správe pre príjemcu
+  používať len ASCII.
 - Prepínač **Jednorazovo / Mesačne**: mesačne vytvorí trvalý príkaz (`PaymentOptions.StandingOrder` = 2,
   `periodicity` „m“, `day` z nastavení, `paymentDueDate` = najbližší taký deň, najskôr zajtra). Nie každá banka
   trvalý príkaz z QR vytvorí, preto je pod QR upozornenie. Obsah QR je v `data-payload` kontajnera (na kontrolu).

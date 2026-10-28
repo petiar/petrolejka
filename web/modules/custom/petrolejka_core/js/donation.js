@@ -10,6 +10,11 @@ import qrcode from './vendor/qrcode-generator-2.0.4.mjs';
 
 const { Drupal, drupalSettings, once } = window;
 
+// Verzia štandardu v hlavičke QR: 0 = 1.0.0. bysquare 4.x predvolene píše
+// 1.2.0, ktorú bankové aplikácie nerozpoznajú (QR kód vôbec nenačítajú).
+// Obsah je pre všetky verzie rovnaký, mení sa len hlavička.
+const SPEC_VERSION = 0;
+
 const formatAmount = (amount) => new Intl.NumberFormat('sk-SK', { style: 'currency', currency: 'EUR' }).format(amount);
 
 /**
@@ -28,7 +33,7 @@ function nextMonthlyDate(day) {
 const ymd = (d) => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
 
 function buildPayment(config, amount, name, monthly) {
-  const note = [config.note, name].filter(Boolean).join(' – ').slice(0, 140);
+  const note = [config.note, name].filter(Boolean).join(' - ').slice(0, 140);
   const payment = {
     type: monthly ? PaymentOptions.StandingOrder : PaymentOptions.PaymentOrder,
     amount,
@@ -130,7 +135,7 @@ function attach(root) {
     const { payment, note, firstDate } = buildPayment(config, amount, nameInput.value.trim(), monthly);
     let data;
     try {
-      data = encode({ payments: [payment] });
+      data = encode({ payments: [payment] }, { deburr: true, validate: true, version: SPEC_VERSION });
     }
     catch (e) {
       error.textContent = Drupal.t('QR kód sa nepodarilo vytvoriť. Použite prosím údaje na platbu nižšie.');
