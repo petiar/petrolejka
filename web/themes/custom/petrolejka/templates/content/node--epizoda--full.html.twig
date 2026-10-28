@@ -1,0 +1,39 @@
+{#
+/**
+ * @file
+ * Epizóda podcastu – plné zobrazenie s prehrávačom.
+ */
+#}
+<article{{ attributes.addClass('story', 'story--episode') }}>
+  <header class="story__header">
+    <p class="kicker">
+      <a class="kicker__label" href="{{ path('view.podcast.page_1') }}">{{ 'Podcast'|t }}</a>
+      {% if episode.number %}<span>{{ 'Epizóda'|t }} {{ episode.number }}</span>{% endif %}
+      <time datetime="{{ date_iso }}">{{ date_human }}</time>
+      {% if episode.duration %}<span>· {{ episode.duration }}</span>{% endif %}
+    </p>
+    <h1{{ title_attributes.addClass('story__title') }}>{{ label }}</h1>
+    <div class="story__perex">{{ content.field_perex }}</div>
+  </header>
+
+  {% if episode.audio_url %}
+    <div class="player">
+      <audio class="player__audio" controls preload="metadata">
+        <source src="{{ episode.audio_url }}" type="{{ episode.audio_type }}">
+      </audio>
+      <a class="player__download" href="{{ episode.audio_url }}" download>{{ 'Stiahnuť epizódu'|t }}</a>
+    </div>
+  {% endif %}
+
+  {% if content.field_image|render|trim %}
+    <figure class="story__figure story__figure--portrait">{{ content.field_image }}</figure>
+  {% endif %}
+
+  <div{{ content_attributes.addClass('story__body', 'prose') }}>
+    {{ content|without('field_image', 'field_perex', 'field_audio', 'field_trvanie', 'field_cislo_epizody', 'links') }}
+  </div>
+
+  <aside class="story__related">
+    {{ 'Počúvajte aj v aplikácii – všetky epizódy a odkazy nájdete na stránke'|t }} <a href="{{ path('view.podcast.page_1') }}">{{ 'Podcast'|t }}</a>.
+  </aside>
+</article>

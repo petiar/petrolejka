@@ -5,6 +5,11 @@
  * Petrolejka – jadro.
  */
 
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+use Drupal\petrolejka_core\PodcastSettings;
+use Drupal\views\ViewExecutable;
+
 /**
  * Implements hook_theme().
  */
@@ -18,5 +23,79 @@ function petrolejka_core_theme(): array {
         'news' => [],
       ],
     ],
+    'petrolejka_podcast_subscribe' => [
+      'variables' => [
+        'cover' => NULL,
+        'description' => NULL,
+        'feed' => NULL,
+        'apple' => NULL,
+        'spotify' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for nodes.
+ *
+ * Dĺžku epizódy zistí z MP3 súboru, aby ju redaktor nemusel vypĺňať.
+ */
+function petrolejka_core_node_presave(NodeInterface $node): void {
+  if ($node->bundle() !== 'epizoda' || !$node->get('field_trvanie')->isEmpty()) {
+    return;
+  }
+  /** @var \Drupal\file\FileInterface|null $audio */
+  $audio = $node->get('field_audio')->entity;
+  $path = $audio ? \Drupal::service('file_system')->realpath($audio->getFileUri()) : FALSE;
+  if (!$path || !class_exists('getID3')) {
+    return;
+  }
+  $info = (new \getID3())->analyze($path);
+  if (!empty($info['playtime_seconds'])) {
+    $node->set('field_trvanie', (int) round($info['playtime_seconds']));
+  }
+}
+
+/**
+ * Absolútna URL obalu podcastu (nahraný alebo predvolený z témy).
+ */
+function petrolejka_core_podcast_cover_url(): string {
+  $fid = PodcastSettings::get()['cover_fid'];
+  if ($fid && ($file = \Drupal::entityTypeManager()->getStorage('file')->load($fid))) {
+    return \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
+  }
+  $path = \Drupal::service('extension.list.module')->getPath('petrolejka_core') . '/images/podcast-cover.jpg';
+  return Url::fromUserInput('/' . $path, ['absolute' => TRUE])->toString();
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function petrolejka_core_page_attachments(array &$attachments): void {
+  // Aplikácie a prehliadače tak feed podcastu nájdu samy.
+  $attachments['#attached']['html_head_link'][] = [[
+    'rel' => 'alternate',
+    'type' => 'application/rss+xml',
+    'title' => 'Podcast Petrolejka',
+    'href' => Url::fromRoute('petrolejka_core.podcast_feed')->toString(),
+  ], FALSE];
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function petrolejka_core_views_pre_render(ViewExecutable $view): void {
+  if ($view->id() !== 'podcast') {
+    return;
+  }
+  $settings = PodcastSettings::get();
+  $view->attachment_before[] = [
+    '#theme' => 'petrolejka_podcast_subscribe',
+    '#cover' => petrolejka_core_podcast_cover_url(),
+    '#description' => $settings['description'],
+    '#feed' => Url::fromRoute('petrolejka_core.podcast_feed', [], ['absolute' => TRUE])->toString(),
+    '#apple' => $settings['apple_url'] ?: NULL,
+    '#spotify' => $settings['spotify_url'] ?: NULL,
+    '#cache' => ['tags' => [PodcastSettings::STATE_KEY]],
   ];
 }

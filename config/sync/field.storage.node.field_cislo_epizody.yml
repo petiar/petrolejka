@@ -1,0 +1,20 @@
+uuid: 44bac958-3e3a-412e-a1d4-9c1bb02833b0
+langcode: sk
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_cislo_epizody
+field_name: field_cislo_epizody
+entity_type: node
+type: integer
+settings:
+  unsigned: true
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,38 @@
+uuid: 89149f90-cf72-4e70-a98c-fe299aa294e3
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image
+    - node.type.epizoda
+  module:
+    - image
+id: node.epizoda.field_image
+field_name: field_image
+entity_type: node
+bundle: epizoda
+label: 'Obrázok epizódy'
+description: 'Nepovinné. Štvorcový obrázok, aspoň 1400 × 1400 px. Inak sa použije obal podcastu.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: podcast/obrazky
+  file_extensions: 'png jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: null
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

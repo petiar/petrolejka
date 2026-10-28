@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Epizóda podcastu v zozname.
+ */
+#}
+<article{{ attributes.addClass('episode-item') }}>
+  <a class="episode-item__play" href="{{ url }}" aria-hidden="true" tabindex="-1">
+    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+  </a>
+  <div class="episode-item__body">
+    <p class="kicker">
+      {% if episode.number %}<span class="kicker__label">{{ 'Epizóda'|t }} {{ episode.number }}</span>{% endif %}
+      <time datetime="{{ date_iso }}">{{ date_human }}</time>
+      {% if episode.duration %}<span>· {{ episode.duration }}</span>{% endif %}
+    </p>
+    <h3{{ title_attributes.addClass('episode-item__title') }}><a href="{{ url }}">{{ label }}</a></h3>
+    <div class="episode-item__text">{{ content.field_perex }}</div>
+  </div>
+</article>

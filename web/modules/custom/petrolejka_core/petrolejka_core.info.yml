@@ -1,8 +1,11 @@
 name: 'Petrolejka – jadro'
 type: module
-description: 'Titulná stránka a drobné úpravy pre web OZ Petrolejka.'
+description: 'Titulná stránka, podcast (feed a nastavenia) a drobné úpravy pre web OZ Petrolejka.'
 package: Petrolejka
 core_version_requirement: ^11
 dependencies:
   - drupal:node
   - drupal:taxonomy
+  - drupal:file
+  - drupal:menu_link_content
+  - drupal:views

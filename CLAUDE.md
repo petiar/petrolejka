@@ -42,6 +42,28 @@ Webform `prihlaska` (/form/prihlaska) slúži ako prihláška za člena. Stanovy
 Menu `main`: Časopis, Dianie v obci, Podujatia, Pamäť obce (term page), Zapoj sa, O nás. Menu `footer` je v päte.
 Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 
+## Podcast
+
+- Typ obsahu `epizoda` (Epizóda podcastu): `field_cislo_epizody`, `field_perex` (krátky popis do aplikácií),
+  `field_audio` (mp3/m4a, max 256 MB, `public://podcast/RRRR`), body (poznámky), `field_image` (nepovinný štvorcový
+  obrázok), `field_trvanie` (sekundy, **vypĺňa sa automaticky** v `petrolejka_core_node_presave()` cez getID3
+  `james-heinrich/getid3`). Alias `podcast/[title]`.
+- `/podcast`: view `podcast` (kópia `dianie`). Box s obalom a odkazmi na odber pridáva
+  `petrolejka_core_views_pre_render()` (šablóna `petrolejka-podcast-subscribe`).
+- **Feed** `/podcast/feed.xml` (`PodcastFeedController`): RSS 2.0 + iTunes/podcast/atom/content namespaces.
+  `guid` je UUID uzla (nemeniť), `enclosure` má veľkosť a MIME súboru. Epizódy bez audia sa preskakujú. Odkaz
+  `rel=alternate` je v hlavičke každej stránky.
+- **Nastavenia podcastu** `/admin/config/media/podcast` (oprávnenie `administer petrolejka podcast`): názov, popis,
+  autor, e-mail vlastníka, kategória Apple, explicit, obal, URL na Apple Podcasts a Spotify. Ukladajú sa do
+  **State API** (`PodcastSettings`, kľúč `petrolejka_core.podcast`), nie do konfigurácie, aby ich `drush deploy`
+  neprepisoval. Predvolený obal 3000×3000 je `petrolejka_core/images/podcast-cover.jpg` (zdroj
+  `assets/logo/petrolejka-podcast-cover.svg`).
+- Menu odkaz „Podcast“ v main menu (obsah, nie konfigurácia) vytvoril deploy hook
+  `petrolejka_core_deploy_podcast_menu()` v `petrolejka_core.deploy.php`. Podobné jednorazové zmeny obsahu na
+  produkcii robiť cez deploy hooky.
+- `web/.user.ini` zvyšuje limit nahrávania na 256 MB (na serveri bolo 2 MB). Ak by Websupport `.user.ini`
+  neakceptoval, limit sa nastavuje vo WebAdmine.
+
 ## Kód
 
 - `web/modules/custom/petrolejka_core`: route `/uvod` (titulná stránka, `system.site:page.front`),
@@ -122,8 +144,8 @@ na `/fotografie`.
 - Titulok a description titulky sú nastavené v `metatag.metatag_defaults.front`.
 
 ## Otvorené / TODO
-- Heslo admina na produkcii bolo po prenose `admin`. Používateľ ho mal zmeniť, over to.
 - Odporúčaná zmena hesla k DB (bolo zdieľané v chate).
 - Na stránke „Podporte nás“ doplniť IBAN a údaje pre 2 % po registrácii združenia.
 - Ukážkový obsah (označený „Toto je ukážkový text…“) nahradiť skutočným.
+- Podcast: po prvej epizóde poslať feed do Apple Podcasts Connect a Spotify for Creators a URL doplniť v nastaveniach.
 - Headless screenshoty (Chrome/Docker) nie sú v tomto prostredí povolené. Vizuálne kontroly robí používateľ.

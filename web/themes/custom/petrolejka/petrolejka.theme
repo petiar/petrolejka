@@ -86,6 +86,10 @@ function petrolejka_preprocess_node(array &$variables): void {
     $variables['rubrika'] = $node->get('field_rubrika')->entity?->label();
   }
 
+  if ($node->bundle() === 'epizoda') {
+    $variables['episode'] = petrolejka_episode_info($node);
+  }
+
   if ($node->bundle() === 'podujatie' && !$node->get('field_datum')->isEmpty()) {
     $variables['event'] = petrolejka_event_dates($node);
   }
@@ -126,4 +130,22 @@ function petrolejka_event_dates(NodeInterface $node): array {
     'iso' => $start->format('c'),
     'past' => ($end ?? $start)->getTimestamp() < \Drupal::time()->getRequestTime(),
   ];
+}
+
+/**
+ * Údaje epizódy podcastu pre šablóny: zvukový súbor a dĺžka.
+ */
+function petrolejka_episode_info(NodeInterface $node): array {
+  $info = ['number' => $node->get('field_cislo_epizody')->value];
+  /** @var \Drupal\file\FileInterface|null $audio */
+  if ($audio = $node->get('field_audio')->entity) {
+    $info['audio_url'] = \Drupal::service('file_url_generator')->generateString($audio->getFileUri());
+    $info['audio_type'] = $audio->getMimeType();
+  }
+  if ($seconds = (int) $node->get('field_trvanie')->value) {
+    $h = intdiv($seconds, 3600);
+    $m = intdiv($seconds % 3600, 60);
+    $info['duration'] = $h ? sprintf('%d h %d min', $h, $m) : sprintf('%d min', max(1, $m));
+  }
+  return $info;
 }

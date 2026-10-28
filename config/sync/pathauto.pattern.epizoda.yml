@@ -1,0 +1,23 @@
+uuid: 96e39764-582c-4fa3-9003-7c83300a64fe
+langcode: sk
+status: true
+dependencies:
+  config:
+    - node.type.epizoda
+  module:
+    - node
+id: epizoda
+label: 'Epizóda podcastu'
+type: 'canonical_entities:node'
+pattern: '/podcast/[node:title]'
+selection_criteria:
+  afc63d12-7dd0-42ab-98d8-242d96e00331:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      epizoda: epizoda
+selection_logic: and
+weight: 0
+relationships: {  }

@@ -1,0 +1,23 @@
+uuid: ba14a857-1469-4d80-b36e-5484cf593570
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cislo_epizody
+    - node.type.epizoda
+id: node.epizoda.field_cislo_epizody
+field_name: field_cislo_epizody
+entity_type: node
+bundle: epizoda
+label: 'Číslo epizódy'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 1
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

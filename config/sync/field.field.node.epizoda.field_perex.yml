@@ -1,0 +1,19 @@
+uuid: 04f7f7e5-5cf7-4fbe-9436-adea6c6d22fc
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_perex
+    - node.type.epizoda
+id: node.epizoda.field_perex
+field_name: field_perex
+entity_type: node
+bundle: epizoda
+label: 'Krátky popis'
+description: 'Jedna-dve vety. Zobrazí sa v zozname epizód a v podcastových aplikáciách.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

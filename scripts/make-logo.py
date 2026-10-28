@@ -164,6 +164,23 @@ def badge():
                        f'<g transform="translate({32 - cx * k:.2f} {32 - cy * k:.2f}) scale({k})">\n    {lamp("inverse")}\n  </g>')
 
 
+def podcast_cover():
+    """Obal podcastu 3000×3000 (Apple: 1400–3000 px, štvorec)."""
+    size = 3000
+    lamp_h = 1250
+    lamp_svg, lamp_w = lamp_group((size - (LAMP_BOX[2] - LAMP_BOX[0]) * lamp_h / (LAMP_BOX[3] - LAMP_BOX[1])) / 2, 380, lamp_h, "inverse")
+    name_size = 470
+    _, nb = wordmark(0, 0, name_size, "inverse")
+    base = 380 + lamp_h + 200 - nb[1]
+    wm, nb2 = wordmark((size - (nb[2] - nb[0])) / 2 - nb[0], base, name_size, "inverse")
+    _, _, pb = run(FONTS["semi"], "PODCAST", 170, 0, 0, 0.3)
+    pod_d, _, _ = run(FONTS["semi"], "PODCAST", 170, (size - (pb[2] - pb[0])) / 2 - pb[0], nb2[3] + 140 - pb[1], 0.3)
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}">\n'
+            f'  <rect width="{size}" height="{size}" fill="{BLUE_DARK}"/>\n'
+            f'  <circle cx="{size / 2}" cy="{380 + lamp_h * 0.42}" r="900" fill="{BLUE}" fill-opacity="0.55"/>\n'
+            f'  {lamp_svg}\n  {wm}\n  <path d="{pod_d}" fill="{YELLOW}"/>\n</svg>\n')
+
+
 def write(name, content):
     with open(f"{OUT}/{name}", "w") as f:
         f.write(content)
@@ -174,4 +191,5 @@ for scheme in ("color", "inverse"):
     write(f"petrolejka-logo-stacked-{scheme}.svg", stacked(scheme))
     write(f"petrolejka-icon-{scheme}.svg", icon(scheme))
 write("petrolejka-icon-badge.svg", badge())
+write("petrolejka-podcast-cover.svg", podcast_cover())
 print("ok", VARIANT)

@@ -1,0 +1,33 @@
+uuid: 8ba561e1-b1f5-434e-9e12-e65d2a61e18e
+langcode: sk
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.epizoda.body
+    - field.field.node.epizoda.field_audio
+    - field.field.node.epizoda.field_cislo_epizody
+    - field.field.node.epizoda.field_image
+    - field.field.node.epizoda.field_perex
+    - field.field.node.epizoda.field_trvanie
+    - node.type.epizoda
+id: node.epizoda.teaser
+targetEntityType: node
+bundle: epizoda
+mode: teaser
+content:
+  field_perex:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  field_audio: true
+  field_cislo_epizody: true
+  field_image: true
+  field_trvanie: true
+  langcode: true
+  links: true

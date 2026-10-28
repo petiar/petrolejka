@@ -627,3 +627,59 @@ body:not(.path-frontpage) .site-main { margin-top: 7px; }
   font-size: 0.85rem;
   color: rgb(255 255 255 / 65%);
 }
+
+/* --- Podcast -------------------------------------------------------------- */
+
+.podcast-intro {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+@media (min-width: 720px) { .podcast-intro { grid-template-columns: 220px 1fr; } }
+.podcast-intro__cover { width: 100%; max-width: 220px; border-radius: var(--radius); }
+.podcast-intro__text { font-size: 1.15rem; margin: 0 0 1rem; }
+.podcast-intro__label { font-weight: 700; margin: 0 0 0.5rem; color: var(--blue-700); }
+.podcast-intro__links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.podcast-intro__hint { margin: 1rem 0 0; font-size: 0.85rem; color: var(--ink-soft); overflow-wrap: anywhere; }
+
+.view-podcast .view-content { grid-template-columns: 1fr; max-width: 760px; gap: 0; }
+
+.episode-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.episode-item__play {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--yellow-500);
+  color: var(--blue-900);
+}
+.episode-item__play:hover { background: var(--yellow-300); color: var(--blue-900); }
+.episode-item__title { font-size: 1.3rem; margin: 0 0 0.3rem; }
+.episode-item__title a { color: var(--blue-900); text-decoration: none; }
+.episode-item__title a:hover { text-decoration: underline; }
+.episode-item__text { color: var(--ink-soft); }
+
+.player {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+  background: var(--blue-900);
+  border-radius: var(--radius);
+}
+.player__audio { flex: 1 1 260px; width: 100%; }
+.player__download { color: var(--yellow-300); font-weight: 600; font-size: 0.95rem; }

@@ -1,0 +1,5 @@
+petrolejka_core.podcast_settings:
+  title: 'Podcast'
+  description: 'Názov, popis a obal podcastu, odkazy na Apple Podcasts a Spotify.'
+  route_name: petrolejka_core.podcast_settings
+  parent: system.admin_config_media

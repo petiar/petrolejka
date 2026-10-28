@@ -1,0 +1,27 @@
+uuid: 0f302711-17b0-4e1d-b770-7e8665490015
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audio
+    - node.type.epizoda
+  module:
+    - file
+id: node.epizoda.field_audio
+field_name: field_audio
+entity_type: node
+bundle: epizoda
+label: 'Zvukový súbor'
+description: 'MP3 (odporúčame 128 kbps mono alebo stereo) alebo M4A.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: 'podcast/[date:custom:Y]'
+  file_extensions: 'mp3 m4a'
+  max_filesize: '256 MB'
+  description_field: false
+field_type: file

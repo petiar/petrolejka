@@ -1,0 +1,11 @@
+uuid: 6126102a-1efc-48a2-a003-195b1d74cd68
+langcode: sk
+status: true
+dependencies: {  }
+name: 'Epizóda podcastu'
+type: epizoda
+description: 'Epizóda podcastu Petrolejka s MP3 súborom. Objaví sa na webe aj vo feede pre podcastové aplikácie.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

@@ -5,3 +5,18 @@ petrolejka_core.front:
     _title: 'Petrolejka'
   requirements:
     _permission: 'access content'
+
+petrolejka_core.podcast_feed:
+  path: '/podcast/feed.xml'
+  defaults:
+    _controller: '\Drupal\petrolejka_core\Controller\PodcastFeedController::feed'
+  requirements:
+    _permission: 'access content'
+
+petrolejka_core.podcast_settings:
+  path: '/admin/config/media/podcast'
+  defaults:
+    _form: '\Drupal\petrolejka_core\Form\PodcastSettingsForm'
+    _title: 'Podcast'
+  requirements:
+    _permission: 'administer petrolejka podcast'

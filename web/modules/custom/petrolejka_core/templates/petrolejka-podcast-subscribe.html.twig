@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Hlavička stránky podcastu s odkazmi na odber.
+ */
+#}
+<section class="podcast-intro">
+  <img class="podcast-intro__cover" src="{{ cover }}" alt="{{ 'Obal podcastu Petrolejka'|t }}" width="240" height="240">
+  <div class="podcast-intro__body">
+    <p class="podcast-intro__text">{{ description }}</p>
+    <p class="podcast-intro__label">{{ 'Počúvajte v aplikácii'|t }}</p>
+    <div class="podcast-intro__links">
+      {% if apple %}<a class="button button--primary" href="{{ apple }}">Apple Podcasts</a>{% endif %}
+      {% if spotify %}<a class="button button--primary" href="{{ spotify }}">Spotify</a>{% endif %}
+      <a class="button" href="{{ feed }}">{{ 'RSS feed'|t }}</a>
+    </div>
+    <p class="podcast-intro__hint">{{ 'V inej aplikácii (Pocket Casts, Overcast…) pridajte podcast cez adresu feedu:'|t }} <code>{{ feed }}</code></p>
+  </div>
+</section>

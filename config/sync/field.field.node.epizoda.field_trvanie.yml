@@ -1,0 +1,23 @@
+uuid: 1dcfb7a0-5a33-4605-8ed2-7a71564205f1
+langcode: sk
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trvanie
+    - node.type.epizoda
+id: node.epizoda.field_trvanie
+field_name: field_trvanie
+entity_type: node
+bundle: epizoda
+label: 'Dĺžka (sekundy)'
+description: 'Vyplní sa automaticky z MP3 súboru pri uložení.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
