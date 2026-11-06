@@ -9,10 +9,12 @@ dependencies:
     - field.field.node.article.field_perex
     - field.field.node.article.field_podujatie
     - field.field.node.article.field_rubrika
+    - field.field.node.article.field_zdroj
     - image.style.thumbnail
     - node.type.article
   module:
     - image
+    - link
     - path
     - text
 id: node.article.default
@@ -79,6 +81,14 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_zdroj:
+    type: link_default
+    weight: 21
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   langcode:
     type: language_select

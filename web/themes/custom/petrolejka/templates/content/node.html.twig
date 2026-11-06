@@ -1,14 +1,11 @@
 {#
 /**
  * @file
- * Všeobecné plné zobrazenie (stránky, správy).
+ * Všeobecné plné zobrazenie (stránky).
  */
 #}
 <article{{ attributes.addClass('story', 'story--' ~ node.bundle|clean_class) }}>
   <header class="story__header">
-    {% if node.bundle == 'sprava' %}
-      <p class="kicker"><a class="kicker__label" href="{{ path('view.dianie.page_1') }}">{{ 'Dianie v obci'|t }}</a><time datetime="{{ date_iso }}">{{ date_human }}</time></p>
-    {% endif %}
     <h1{{ title_attributes.addClass('story__title') }}>{{ label }}</h1>
   </header>
 
@@ -17,12 +14,8 @@
   {% endif %}
 
   <div{{ content_attributes.addClass('story__body', 'prose') }}>
-    {{ content|without('field_image', 'field_prilohy', 'field_zdroj', 'links') }}
+    {{ content|without('field_image', 'field_prilohy', 'links') }}
   </div>
-
-  {% if content.field_zdroj|render|trim %}
-    <p class="story__source">{{ 'Zdroj:'|t }} {{ content.field_zdroj }}</p>
-  {% endif %}
 
   {% if content.field_prilohy|render|trim %}
     <section class="documents">

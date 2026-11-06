@@ -1,7 +1,7 @@
 # Petrolejka – web OZ Petrolejka (petrolejka.sk)
 
 Komunitný web občianskeho združenia Petrolejka z Liptovského Petra. Je to nezávislá alternatíva k oficiálnej stránke obce
-(časopis, podujatia, dianie v obci, pamäť obce, členstvo). Web **nesmie pôsobiť ako oficiálna stránka obce**: nepoužívať
+(články, podujatia, dianie v obci, pamäť obce, členstvo). Web **nesmie pôsobiť ako oficiálna stránka obce**: nepoužívať
 erb a v päte nechať disclaimer. Ciele vychádzajú zo stanov (čl. II): podujatia, internetový časopis, informovanie
 o dianí, história a tradície, dobrovoľníctvo.
 
@@ -20,27 +20,31 @@ Komunikácia s používateľom je po slovensky a texty na webe sú po slovensky.
 
 Typy obsahu (node):
 - `article` (Článok): `field_perex`, `field_image`, `field_rubrika` → tax. `rubrika`, `field_podujatie` → podujatie,
-  `field_galeria`. **Autor je vlastník uzla (používateľ)**, v článku sa zobrazí ako „Text: <meno>“ (`author_name`).
+  `field_galeria`, `field_zdroj` (link). **Autor je vlastník uzla (používateľ)**, v článku sa zobrazí ako „Text: <meno>“
+  (`author_name`). **Správy z obce sú články s rubrikou „Z obce“** (zobrazujú sa v /dianie a na titulke).
 - `podujatie`: `field_datum` (daterange, ukladá sa v UTC), `field_miesto` → tax. `miesto`, `field_typ_podujatia` →
   tax. `typ_podujatia`, `field_image`, `field_vstupne`, `field_registracia` (link), `field_galeria`.
-- `sprava` (Správa z obce): body, `field_zdroj` (link).
 - `page`: `field_image`, `field_prilohy` (dokumenty).
 
 Typy `cislo` (Číslo časopisu) a `osoba` boli 6. 11. 2026 odstránené (časopis bude len tlačený, autori sú používatelia).
-Ich uzly zmazal `petrolejka_core_post_update_delete_cislo_osoba()`. Skripty `setup-*.php` ich ešte obsahujú.
+Ich uzly zmazal `petrolejka_core_post_update_delete_cislo_osoba()`. Typ `sprava` bol v ten istý deň zlúčený do
+`article` (`petrolejka_core_post_update_sprava_to_article()` + `petrolejka_core_deploy_merge_sprava()`) a sekcia
+„Časopis“ (/casopis) premenovaná na „Články“ (/clanky). Staré URL /casopis/… a /dianie/… nemajú presmerovanie.
+Skripty `setup-*.php` ešte obsahujú pôvodnú štruktúru.
 
 Slovníky: `rubrika` (Z obce, Pamäť obce, Rozhovor, Príroda, Kultúra), `typ_podujatia`, `miesto`.
 View mode `lead` (hlavný článok na titulke) existuje len pre `article`.
 
-Views: `casopis` (/casopis), `dianie` (/dianie), `podujatia` (/podujatia = nadchádzajúce,
+Views: `casopis` (/clanky, id ostalo), `dianie` (/dianie = články v rubrike „Z obce“, filter podľa názvu termu cez
+relationship, view mode `news`), `podujatia` (/podujatia = nadchádzajúce,
 /podujatia/archiv = minulé, filtruje sa podľa `field_datum_end_value` voči `now`).
 
-Pathauto: `casopis/[title]`, `podujatia/[title]`, `dianie/[title]`,
-stránky `[title]`, rubriky `casopis/rubrika/[name]`.
+Pathauto: `clanky/[title]`, `podujatia/[title]`,
+stránky `[title]`, rubriky `clanky/rubrika/[name]`.
 
 Webform `prihlaska` (/form/prihlaska) slúži ako prihláška za člena. Stanovy povoľujú podať žiadosť elektronicky.
 
-Menu `main`: Časopis, Dianie v obci, Podujatia, Pamäť obce (term page), Zapoj sa, O nás. Menu `footer` je v päte.
+Menu `main`: Články, Dianie v obci, Podujatia, Pamäť obce (term page), Zapoj sa, O nás. Menu `footer` je v päte.
 Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 
 ## Podcast
@@ -100,7 +104,7 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 
 - `web/modules/custom/petrolejka_core`: route `/uvod` (titulná stránka, `system.site:page.front`),
   `FrontController` + šablóna `petrolejka-front.html.twig`. Obsahuje hlavný článok (sticky/najnovší), karty, 4
-  nadchádzajúce podujatia, 5 správ a výzvu na zapojenie. Render polia sa posielajú ako zoznam
+  nadchádzajúce podujatia, 5 správ (články „Z obce“, view mode `news`; z kariet článkov sú vylúčené) a výzvu na zapojenie. Render polia sa posielajú ako zoznam
   jednotlivých `view()`, nie `viewMultiple()`, lebo v Twigu sa cez ne iteruje.
 - `web/themes/custom/petrolejka`: vlastná téma (`base theme: false`), predvolená.
   - Farby obce: modrá `--blue-700 #1d3f8f` / `--blue-900`, biela, žltá `--yellow-500 #f4c20d` (plameň petrolejky).
@@ -110,7 +114,7 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
     a titulke, `petrolejka_event_dates()` (dátumy podujatí v miestnom čase), čas čítania článku. Všetky teasery
     dostávajú suggestion `node__teaser`.
   - Šablóny: plné zobrazenia `node--article--full`, `node--podujatie--full` a všeobecné `node.html.twig`. Teasery
-    `node--teaser` (karta), `node--podujatie--teaser`, `node--sprava--teaser`. Ďalej `node--article--lead`,
+    `node--teaser` (karta), `node--podujatie--teaser`, `node--news` (riadok v zozname správ). Ďalej `node--article--lead`,
     `field--field-galeria` a `menu--main`.
   - **Pozor v Twigu:** `node.field_x.entity` je pravdivé aj pri prázdnom poli. Na kontrolu používať
     `not node.field_x.isEmpty`.

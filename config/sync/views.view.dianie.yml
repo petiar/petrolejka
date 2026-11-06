@@ -3,10 +3,11 @@ langcode: sk
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
-    - node.type.sprava
+    - core.entity_view_mode.node.news
+    - node.type.article
   module:
     - node
+    - taxonomy
     - user
 id: dianie
 label: 'Dianie v obci'
@@ -78,8 +79,22 @@ display:
           entity_field: type
           plugin_id: bundle
           value:
-            sprava: sprava
+            article: article
           group: 1
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_rubrika
+          group_type: group
+          admin_label: ''
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+          operator: '='
+          value: 'Z obce'
+          group: 1
+          exposed: false
       filter_groups:
         operator: AND
         groups:
@@ -91,11 +106,20 @@ display:
       row:
         type: 'entity:node'
         options:
-          view_mode: teaser
+          view_mode: news
       query:
         type: views_query
         options: {  }
-      relationships: {  }
+      relationships:
+        field_rubrika:
+          id: field_rubrika
+          table: node__field_rubrika
+          field: field_rubrika
+          relationship: none
+          group_type: group
+          admin_label: Rubrika
+          plugin_id: standard
+          required: true
       css_class: listing
       use_more: false
       display_extenders: {  }

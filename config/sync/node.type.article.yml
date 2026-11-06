@@ -4,7 +4,7 @@ status: true
 dependencies: {  }
 name: Článok
 type: article
-description: 'Článok internetového časopisu.'
+description: 'Článok na webe. Rubrika „Z obce“ sa zobrazuje aj v Dianí v obci.'
 help: null
 new_revision: true
 preview_mode: 1

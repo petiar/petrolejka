@@ -9,7 +9,7 @@ dependencies:
 id: clanok
 label: Článok
 type: 'canonical_entities:node'
-pattern: '/casopis/[node:title]'
+pattern: '/clanky/[node:title]'
 selection_criteria:
   19c3191d-5432-47f9-ad76-d5c038dba4a0:
     id: 'entity_bundle:node'

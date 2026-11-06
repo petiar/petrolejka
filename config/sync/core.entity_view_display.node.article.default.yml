@@ -9,10 +9,12 @@ dependencies:
     - field.field.node.article.field_perex
     - field.field.node.article.field_podujatie
     - field.field.node.article.field_rubrika
+    - field.field.node.article.field_zdroj
     - image.style.wide
     - node.type.article
   module:
     - image
+    - link
     - text
     - user
 id: node.article.default
@@ -71,6 +73,18 @@ content:
       link: true
     third_party_settings: {  }
     weight: 3
+    region: content
+  field_zdroj:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 20
     region: content
   links:
     settings: {  }

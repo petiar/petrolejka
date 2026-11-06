@@ -26,8 +26,12 @@
   {% endif %}
 
   <div{{ content_attributes.addClass('story__body', 'prose') }}>
-    {{ content|without('field_image', 'field_perex', 'field_rubrika', 'field_galeria', 'field_podujatie', 'links') }}
+    {{ content|without('field_image', 'field_perex', 'field_rubrika', 'field_galeria', 'field_podujatie', 'field_zdroj', 'links') }}
   </div>
+
+  {% if content.field_zdroj|render|trim %}
+    <p class="story__source">{{ 'Zdroj:'|t }} {{ content.field_zdroj }}</p>
+  {% endif %}
 
   {% if content.field_galeria|render|trim %}
     <section class="story__gallery">

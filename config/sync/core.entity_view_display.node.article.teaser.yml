@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.article.field_perex
     - field.field.node.article.field_podujatie
     - field.field.node.article.field_rubrika
+    - field.field.node.article.field_zdroj
     - image.style.max_650x650
     - node.type.article
   module:
@@ -55,4 +56,5 @@ hidden:
   body: true
   field_galeria: true
   field_podujatie: true
+  field_zdroj: true
   langcode: true

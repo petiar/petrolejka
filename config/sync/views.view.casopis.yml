@@ -9,7 +9,7 @@ dependencies:
     - node
     - user
 id: casopis
-label: Časopis
+label: Články
 module: views
 description: ''
 tag: ''
@@ -22,7 +22,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Časopis
+      title: Články
       fields: {  }
       pager:
         type: full
@@ -114,7 +114,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: casopis
+      path: clanky
     cache_metadata:
       max-age: -1
       contexts:

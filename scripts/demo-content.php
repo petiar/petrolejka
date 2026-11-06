@@ -156,12 +156,13 @@ $news = [
   ['Zasadnutie obecného zastupiteľstva', 'Na stránke budeme stručne zhrnúť, o čom poslanci rokovali, a pridáme odkaz na úradnú zápisnicu.'],
   ['Zimná údržba ciest: na čo myslieť', 'Pripomíname, aby autá neparkovali na úzkych uliciach a nebránili pluhom pri odhŕňaní snehu.'],
   ['Hľadáme staré fotografie obce', 'Pre seriál Pamäť obce zbierame fotografie spred roku 1990. Originál vám po naskenovaní vrátime.'],
-  ['Petrolejka má novú webstránku', 'Spúšťame web, na ktorom nájdete časopis, kalendár podujatí aj správy z obce.'],
+  ['Petrolejka má novú webstránku', 'Spúšťame web, na ktorom nájdete články, kalendár podujatí aj správy z obce.'],
 ];
 foreach ($news as $i => [$title, $text]) {
   Node::create([
-    'type' => 'sprava',
+    'type' => 'article',
     'title' => $title,
+    'field_rubrika' => $r['Z obce'],
     'body' => $html("<p>$text</p>" . $note),
     'created' => $created - $i * 86400 * 2,
     'uid' => 1,
@@ -197,7 +198,7 @@ foreach ($pages as $alias => [$title, $body]) {
 
 // --- Menu ------------------------------------------------------------------------
 $main = [
-  ['Časopis', 'internal:/casopis'],
+  ['Články', 'internal:/clanky'],
   ['Dianie v obci', 'internal:/dianie'],
   ['Podujatia', 'internal:/podujatia'],
   ['Pamäť obce', 'internal:/taxonomy/term/' . $r['Pamäť obce']],
@@ -208,7 +209,6 @@ $footer = [
   ['O nás', 'entity:node/' . $page_nodes['o-nas']->id()],
   ['Podporte nás', 'entity:node/' . $page_nodes['podporte-nas']->id()],
   ['Prihláška za člena', 'internal:/form/prihlaska'],
-  ['Čísla časopisu', 'internal:/casopis/cisla'],
   ['Archív podujatí', 'internal:/podujatia/archiv'],
   ['Zdroje fotografií', 'entity:node/' . $page_nodes['fotografie']->id()],
 ];

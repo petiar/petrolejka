@@ -1,0 +1,29 @@
+uuid: c264c4bc-7e3e-4b0d-853e-4f961a6dd3ce
+langcode: sk
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.news
+    - field.field.node.article.body
+    - field.field.node.article.field_galeria
+    - field.field.node.article.field_image
+    - field.field.node.article.field_perex
+    - field.field.node.article.field_podujatie
+    - field.field.node.article.field_rubrika
+    - field.field.node.article.field_zdroj
+    - node.type.article
+id: node.article.news
+targetEntityType: node
+bundle: article
+mode: news
+content: {  }
+hidden:
+  body: true
+  field_galeria: true
+  field_image: true
+  field_perex: true
+  field_podujatie: true
+  field_rubrika: true
+  field_zdroj: true
+  langcode: true
+  links: true

@@ -9,7 +9,7 @@ dependencies:
 id: rubrika
 label: Rubrika
 type: 'canonical_entities:taxonomy_term'
-pattern: '/casopis/rubrika/[term:name]'
+pattern: '/clanky/rubrika/[term:name]'
 selection_criteria:
   8136c3f1-1f18-40d3-a189-42516ab92599:
     id: 'entity_bundle:taxonomy_term'

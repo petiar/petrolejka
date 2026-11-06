@@ -1,0 +1,11 @@
+uuid: d6039379-a7db-4db4-863b-7e7332047a60
+langcode: sk
+status: true
+dependencies:
+  module:
+    - node
+id: node.news
+label: 'Správa v zozname'
+description: 'Riadok v zozname Dianie v obci (dátum a názov).'
+targetEntityType: node
+cache: true

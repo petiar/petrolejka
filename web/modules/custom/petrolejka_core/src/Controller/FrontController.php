@@ -23,13 +23,21 @@ class FrontController extends ControllerBase {
       ->condition('status', 1)
       ->condition('type', $type);
 
-    $article_ids = $query('article')->sort('sticky', 'DESC')->sort('created', 'DESC')->range(0, 7)->execute();
+    // Články z rubriky „Z obce“ sú v samostatnom zozname Dianie v obci.
+    $z_obce = array_keys($this->entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'rubrika', 'name' => 'Z obce']));
+    $articles_query = $query('article');
+    if ($z_obce) {
+      $articles_query->condition($articles_query->orConditionGroup()
+        ->notExists('field_rubrika')
+        ->condition('field_rubrika', $z_obce, 'NOT IN'));
+    }
+    $article_ids = $articles_query->sort('sticky', 'DESC')->sort('created', 'DESC')->range(0, 7)->execute();
     $articles = $storage->loadMultiple($article_ids);
     $lead = array_shift($articles);
 
     $now = (new DrupalDateTime('now', DateTimeItemInterface::STORAGE_TIMEZONE))->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
     $event_ids = $query('podujatie')->condition('field_datum.end_value', $now, '>=')->sort('field_datum.value')->range(0, 4)->execute();
-    $news_ids = $query('sprava')->sort('created', 'DESC')->range(0, 5)->execute();
+    $news_ids = $z_obce ? $query('article')->condition('field_rubrika', $z_obce, 'IN')->sort('created', 'DESC')->range(0, 5)->execute() : [];
 
     // Jednotlivé render polia, aby sa v šablóne dalo iterovať a počítať.
     $view = fn(array $nodes) => array_values(array_map(fn($node) => $builder->view($node, 'teaser'), $nodes));
@@ -39,8 +47,8 @@ class FrontController extends ControllerBase {
       '#lead' => $lead ? $builder->view($lead, 'lead') : NULL,
       '#articles' => $view($articles),
       '#events' => $view($storage->loadMultiple($event_ids)),
-      '#news' => $view($storage->loadMultiple($news_ids)),
-      '#cache' => ['tags' => ['node_list']],
+      '#news' => array_values(array_map(fn($node) => $builder->view($node, 'news'), $storage->loadMultiple($news_ids))),
+      '#cache' => ['tags' => ['node_list', 'taxonomy_term_list']],
     ];
   }
 

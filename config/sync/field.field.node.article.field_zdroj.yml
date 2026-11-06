@@ -1,18 +1,18 @@
-uuid: e1aa566d-4c38-42b6-8a3f-aa4956dcfc19
+uuid: 09262f9a-d98c-4934-a523-91214a8019ea
 langcode: sk
 status: true
 dependencies:
   config:
     - field.storage.node.field_zdroj
-    - node.type.sprava
+    - node.type.article
   module:
     - link
-id: node.sprava.field_zdroj
+id: node.article.field_zdroj
 field_name: field_zdroj
 entity_type: node
-bundle: sprava
+bundle: article
 label: Zdroj
-description: ''
+description: 'Odkaz na pôvodný zdroj, napr. oznam na stránke obce.'
 required: false
 translatable: true
 default_value: {  }
