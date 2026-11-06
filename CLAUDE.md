@@ -19,22 +19,23 @@ Komunikácia s používateľom je po slovensky a texty na webe sú po slovensky.
 ## Obsahový model
 
 Typy obsahu (node):
-- `article` (Článok): `field_perex`, `field_image`, `field_rubrika` → tax. `rubrika`, `field_autor` → osoba (viac hodnôt),
-  `field_cislo` → cislo, `field_podujatie` → podujatie, `field_galeria`.
-- `cislo` (Číslo časopisu): `field_poradie`, `field_image` (obálka), body = úvodník.
+- `article` (Článok): `field_perex`, `field_image`, `field_rubrika` → tax. `rubrika`, `field_podujatie` → podujatie,
+  `field_galeria`. **Autor je vlastník uzla (používateľ)**, v článku sa zobrazí ako „Text: <meno>“ (`author_name`).
 - `podujatie`: `field_datum` (daterange, ukladá sa v UTC), `field_miesto` → tax. `miesto`, `field_typ_podujatia` →
   tax. `typ_podujatia`, `field_image`, `field_vstupne`, `field_registracia` (link), `field_galeria`.
 - `sprava` (Správa z obce): body, `field_zdroj` (link).
-- `osoba`: `field_rola`, `field_image`.
 - `page`: `field_image`, `field_prilohy` (dokumenty).
+
+Typy `cislo` (Číslo časopisu) a `osoba` boli 6. 11. 2026 odstránené (časopis bude len tlačený, autori sú používatelia).
+Ich uzly zmazal `petrolejka_core_post_update_delete_cislo_osoba()`. Skripty `setup-*.php` ich ešte obsahujú.
 
 Slovníky: `rubrika` (Z obce, Pamäť obce, Rozhovor, Príroda, Kultúra), `typ_podujatia`, `miesto`.
 View mode `lead` (hlavný článok na titulke) existuje len pre `article`.
 
-Views: `casopis` (/casopis), `cisla` (/casopis/cisla), `dianie` (/dianie), `podujatia` (/podujatia = nadchádzajúce,
+Views: `casopis` (/casopis), `dianie` (/dianie), `podujatia` (/podujatia = nadchádzajúce,
 /podujatia/archiv = minulé, filtruje sa podľa `field_datum_end_value` voči `now`).
 
-Pathauto: `casopis/[title]`, `casopis/cislo-[poradie]`, `podujatia/[title]`, `dianie/[title]`, `ludia/[title]`,
+Pathauto: `casopis/[title]`, `podujatia/[title]`, `dianie/[title]`,
 stránky `[title]`, rubriky `casopis/rubrika/[name]`.
 
 Webform `prihlaska` (/form/prihlaska) slúži ako prihláška za člena. Stanovy povoľujú podať žiadosť elektronicky.

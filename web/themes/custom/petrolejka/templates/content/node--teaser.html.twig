@@ -13,7 +13,7 @@
   <div class="card__body">
     <p class="kicker">
       {% if rubrika %}<span class="kicker__label">{{ rubrika }}</span>{% endif %}
-      {% if node.bundle == 'osoba' %}{{ content.field_rola }}{% else %}<time datetime="{{ date_iso }}">{{ date_human }}</time>{% endif %}
+      <time datetime="{{ date_iso }}">{{ date_human }}</time>
     </p>
     <h3{{ title_attributes.addClass('card__title') }}><a href="{{ url }}">{{ label }}</a></h3>
     {% if content.field_perex|render|trim %}

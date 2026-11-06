@@ -60,24 +60,6 @@ foreach (['Premietanie', 'Workshop', 'Prednáška', 'Komunitné stretnutie'] as 
   $typ[$name] = $term('typ_podujatia', $name);
 }
 
-// --- Osoby a číslo časopisu -------------------------------------------------
-$redakcia = Node::create([
-  'type' => 'osoba',
-  'title' => 'Redakcia Petrolejky',
-  'field_rola' => 'Redakcia',
-  'body' => $html('<p>Spoločný podpis redakčného tímu občianskeho združenia Petrolejka.</p>'),
-]);
-$redakcia->save();
-
-$cislo = Node::create([
-  'type' => 'cislo',
-  'title' => 'Číslo 1 – Jeseň 2026',
-  'field_poradie' => 1,
-  'field_image' => $image('img8.jpg', 'Pohľad na Liptovský Hrádok a Západné Tatry'),
-  'body' => $html('<p>Vitajte pri prvom čísle Petrolejky. Chceme písať o tom, čo sa v obci deje, kto tu žije a čo sa tu kedysi dialo.</p>' . $note),
-]);
-$cislo->save();
-
 // --- Články -------------------------------------------------------------------
 $articles = [
   [
@@ -135,8 +117,6 @@ foreach ($articles as $i => $a) {
     'title' => $a['title'],
     'field_perex' => $a['perex'],
     'field_rubrika' => $r[$a['rubrika']],
-    'field_autor' => [$redakcia->id()],
-    'field_cislo' => $cislo->id(),
     'field_image' => $image(...$a['img']),
     'field_galeria' => array_map(fn($g) => $image(...$g), $a['galeria'] ?? []),
     'body' => $html($a['body'] . $note),

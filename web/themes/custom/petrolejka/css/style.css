@@ -358,7 +358,6 @@ body:not(.path-frontpage) .site-main { margin-top: 7px; }
 .card__title a:hover { color: var(--blue-700); text-decoration: underline; }
 .card__text { color: var(--ink-soft); font-size: 0.98rem; }
 .card__text p { margin: 0; }
-.card--osoba .card__media { aspect-ratio: 1; }
 
 /* --- Titulná stránka ----------------------------------------------------- */
 

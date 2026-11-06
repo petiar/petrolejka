@@ -5,8 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.article.body
-    - field.field.node.article.field_autor
-    - field.field.node.article.field_cislo
     - field.field.node.article.field_galeria
     - field.field.node.article.field_image
     - field.field.node.article.field_perex
@@ -55,8 +53,6 @@ content:
     region: content
 hidden:
   body: true
-  field_autor: true
-  field_cislo: true
   field_galeria: true
   field_podujatie: true
   langcode: true
