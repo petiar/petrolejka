@@ -680,6 +680,21 @@ body:not(.path-frontpage) .site-main { margin-top: 7px; }
 .site-footer .menu a { color: var(--white); text-decoration: none; line-height: 2; }
 .site-footer .menu a:hover { text-decoration: underline; }
 .site-footer .block__title { color: var(--white); font-size: 1.1rem; }
+.social { list-style: none; display: flex; gap: 0.75rem; padding: 0; margin: 1rem 0 0; }
+.site-footer .social__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem 0.4rem 0.5rem;
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 999px;
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+}
+.site-footer .social__link:hover { background: rgb(255 255 255 / 10%); color: var(--yellow-300); }
+.social__icon { flex: none; }
+
 .site-footer__disclaimer {
   grid-column: 1 / -1;
   margin: 0;
