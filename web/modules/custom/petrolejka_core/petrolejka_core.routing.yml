@@ -28,3 +28,18 @@ petrolejka_core.donation_settings:
     _title: 'Darovanie (PAY by square)'
   requirements:
     _permission: 'administer petrolejka donation'
+
+petrolejka_core.odpad:
+  path: '/odpad'
+  defaults:
+    _controller: '\Drupal\petrolejka_core\Controller\WasteController::page'
+    _title: 'Zvoz odpadu'
+  requirements:
+    _permission: 'access content'
+
+petrolejka_core.odpad_feed:
+  path: '/odpad/kalendar.ics'
+  defaults:
+    _controller: '\Drupal\petrolejka_core\Controller\WasteController::feed'
+  requirements:
+    _permission: 'access content'

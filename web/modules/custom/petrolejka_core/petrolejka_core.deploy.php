@@ -73,3 +73,21 @@ function petrolejka_core_deploy_merge_sprava(): string {
 
   return sprintf('Doplnené zdroje: %d, nové aliasy: %d.', count($zdroje), $count);
 }
+
+/**
+ * Pridá „Zvoz odpadu“ do päty a stiahne kalendár odpadu z webu obce.
+ */
+function petrolejka_core_deploy_odpad(): string {
+  $storage = \Drupal::entityTypeManager()->getStorage('menu_link_content');
+  if (!$storage->loadByProperties(['menu_name' => 'footer', 'link__uri' => 'internal:/odpad'])) {
+    $weights = array_map(fn($link) => $link->getWeight(), $storage->loadByProperties(['menu_name' => 'footer']));
+    MenuLinkContent::create([
+      'menu_name' => 'footer',
+      'title' => 'Zvoz odpadu',
+      'link' => ['uri' => 'internal:/odpad'],
+      'weight' => $weights ? max($weights) + 1 : 0,
+    ])->save();
+  }
+  $count = \Drupal\petrolejka_core\WasteCalendar::refresh();
+  return $count === NULL ? 'Odkaz pridaný, kalendár sa nepodarilo stiahnuť (skúsi to cron).' : "Odkaz pridaný, stiahnutých termínov: $count.";
+}

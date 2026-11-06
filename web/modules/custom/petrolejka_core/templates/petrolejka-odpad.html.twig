@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Stránka /odpad: nadchádzajúce termíny zvozu odpadu po mesiacoch.
+ */
+#}
+<div class="waste-page">
+  <p class="waste-page__intro">
+    {{ 'Termíny zvozu a zberu odpadu v Liptovskom Petri. Preberáme ich automaticky z <a href=":url">kalendára obce</a>, ktorý je záväzný.'|t({':url': source_url}) }}
+  </p>
+
+  {% for month, events in months %}
+    <section class="waste-month">
+      <h2 class="waste-month__title">{{ month }}</h2>
+      {% include '@petrolejka_core/petrolejka-odpad-list.html.twig' with {events: events} only %}
+    </section>
+  {% else %}
+    <p class="muted">{{ 'Obec zatiaľ nezverejnila ďalšie termíny zvozu. Pozrite si <a href=":url">kalendár obce</a>.'|t({':url': source_url}) }}</p>
+  {% endfor %}
+
+  <aside class="waste-subscribe">
+    <h2>{{ 'Termíny v kalendári telefónu'|t }}</h2>
+    <p>{{ 'Kalendár si môžete pridať do telefónu alebo počítača. Termíny sa budú aktualizovať samé a deň vopred o 18:00 vám kalendár pripomenie, čo treba vyložiť (ak má pripomienky odberaných kalendárov zapnuté).'|t }}</p>
+    <p class="waste-subscribe__actions">
+      <a class="button button--primary" href="{{ webcal_url }}">{{ 'Pridať do kalendára'|t }}</a>
+    </p>
+    <p class="waste-subscribe__help">
+      {{ 'Google Kalendár: Ďalšie kalendáre → Z webovej adresy a vložte adresu:'|t }}<br>
+      <code>{{ feed_url }}</code>
+    </p>
+  </aside>
+
+  <p class="waste-page__source muted">
+    {{ 'Zdroj: <a href=":url">liptovskypeter.sk</a>.'|t({':url': source_url}) }}
+    {% if updated %}{{ 'Naposledy aktualizované @date.'|t({'@date': updated}) }}{% endif %}
+  </p>
+</div>

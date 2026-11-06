@@ -5,6 +5,7 @@ namespace Drupal\petrolejka_core\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\petrolejka_core\WasteCalendar;
 
 /**
  * Titulná stránka: hlavný článok, ďalšie články, podujatia a správy.
@@ -48,7 +49,8 @@ class FrontController extends ControllerBase {
       '#articles' => $view($articles),
       '#events' => $view($storage->loadMultiple($event_ids)),
       '#news' => array_values(array_map(fn($node) => $builder->view($node, 'news'), $storage->loadMultiple($news_ids))),
-      '#cache' => ['tags' => ['node_list', 'taxonomy_term_list']],
+      '#waste' => WasteCalendar::present(WasteCalendar::upcoming(3)),
+      '#cache' => ['tags' => ['node_list', 'taxonomy_term_list', WasteCalendar::CACHE_TAG]],
     ];
   }
 

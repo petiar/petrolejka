@@ -8,6 +8,7 @@
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 use Drupal\petrolejka_core\PodcastSettings;
+use Drupal\petrolejka_core\WasteCalendar;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -21,7 +22,20 @@ function petrolejka_core_theme(): array {
         'articles' => [],
         'events' => [],
         'news' => [],
+        'waste' => [],
       ],
+    ],
+    'petrolejka_odpad' => [
+      'variables' => [
+        'months' => [],
+        'feed_url' => NULL,
+        'webcal_url' => NULL,
+        'source_url' => NULL,
+        'updated' => NULL,
+      ],
+    ],
+    'petrolejka_odpad_list' => [
+      'variables' => ['events' => [], 'compact' => FALSE],
     ],
     'petrolejka_donation' => [
       'variables' => [
@@ -110,4 +124,11 @@ function petrolejka_core_views_pre_render(ViewExecutable $view): void {
     '#spotify' => $settings['spotify_url'] ?: NULL,
     '#cache' => ['tags' => [PodcastSettings::STATE_KEY]],
   ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function petrolejka_core_cron(): void {
+  WasteCalendar::cron();
 }

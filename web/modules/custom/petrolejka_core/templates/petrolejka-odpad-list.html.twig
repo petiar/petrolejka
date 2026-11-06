@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Zoznam termínov zvozu odpadu (stránka /odpad aj blok na titulke).
+ *
+ * Premenné: events (z WasteCalendar::present()), compact.
+ */
+#}
+<ul class="waste-list{{ compact ? ' waste-list--compact' }}">
+  {% for event in events %}
+    <li class="waste waste--{{ event.type }}{{ event.relative ? ' waste--soon' }}">
+      <span class="waste__date" aria-hidden="true">
+        <span class="waste__day">{{ event.day }}.</span>
+        <span class="waste__weekday">{{ event.weekday }}</span>
+      </span>
+      <span class="waste__body">
+        <span class="waste__title">{{ event.title }}</span>
+        <span class="waste__meta">
+          <span class="waste__type">{{ event.type_label }}</span>
+          <time datetime="{{ event.start }}">{{ event.date_label }}</time>
+          {% if event.relative %}<strong class="waste__relative">{{ event.relative }}</strong>{% endif %}
+        </span>
+      </span>
+    </li>
+  {% endfor %}
+</ul>

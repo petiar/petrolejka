@@ -447,6 +447,68 @@ body:not(.path-frontpage) .site-main { margin-top: 7px; }
 .news-item__title a:hover { color: var(--blue-700); text-decoration: underline; }
 .view-dianie .view-content { grid-template-columns: 1fr; max-width: 760px; gap: 0; }
 
+/* --- Zvoz odpadu ------------------------------------------------------- */
+
+.waste-list { list-style: none; margin: 0; padding: 0; }
+.waste {
+  --waste: #8a8f9c;
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.waste:last-child { border-bottom: 0; }
+.waste--plast { --waste: #e0b000; }
+.waste--papier { --waste: var(--blue-500); }
+.waste--sklo { --waste: #2f9a5b; }
+.waste--bio, .waste--konare { --waste: #7a5a2f; }
+.waste--objemny { --waste: #c2553a; }
+.waste--zmesovy { --waste: #4b5263; }
+.waste__date {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--waste) 14%, var(--white));
+  border-left: 4px solid var(--waste);
+  line-height: 1.05;
+}
+.waste__day { font-family: var(--font-serif); font-weight: 700; font-size: 1.25rem; color: var(--ink); }
+.waste__weekday { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); }
+.waste__body { display: grid; gap: 0.1rem; min-width: 0; }
+.waste__title { font-weight: 600; color: var(--ink); }
+.waste__meta { display: flex; flex-wrap: wrap; gap: 0.2rem 0.6rem; font-size: 0.88rem; color: var(--ink-soft); }
+.waste__type { color: color-mix(in srgb, var(--waste) 75%, var(--ink)); font-weight: 600; }
+.waste__relative {
+  background: var(--yellow-300);
+  color: var(--blue-900);
+  border-radius: 999px;
+  padding: 0 0.5rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.waste-list--compact .waste { padding: 0.55rem 0; gap: 0.75rem; grid-template-columns: 2.8rem 1fr; }
+.waste-list--compact .waste__day { font-size: 1.1rem; }
+.waste-list--compact .waste__title { font-size: 0.98rem; }
+
+.waste-page { max-width: 760px; }
+.waste-page__intro { font-size: 1.1rem; color: var(--ink-soft); }
+.waste-month { margin-top: 2rem; }
+.waste-month__title { font-size: 1.35rem; margin: 0 0 0.25rem; }
+.waste-subscribe {
+  margin-top: 2.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--blue-100);
+  border-radius: var(--radius);
+}
+.waste-subscribe h2 { font-size: 1.25rem; margin-top: 0; }
+.waste-subscribe__help { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0; }
+.waste-subscribe code { word-break: break-all; font-size: 0.85rem; }
+.waste-page__source { margin-top: 1.5rem; font-size: 0.9rem; }
+
 /* --- Výzva ---------------------------------------------------------------- */
 
 .join {

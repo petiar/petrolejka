@@ -41,6 +41,16 @@
         {% endif %}
       </section>
 
+      {% if waste|length %}
+        <section class="panel panel--waste" aria-labelledby="front-waste">
+          <header class="section-head">
+            <h2 id="front-waste" class="section-head__title">{{ 'Zvoz odpadu'|t }}</h2>
+            <a class="section-head__more" href="{{ path('petrolejka_core.odpad') }}">{{ 'Celý kalendár'|t }} →</a>
+          </header>
+          {% include '@petrolejka_core/petrolejka-odpad-list.html.twig' with {events: waste, compact: true} only %}
+        </section>
+      {% endif %}
+
       <section class="panel panel--news" aria-labelledby="front-news">
         <header class="section-head">
           <h2 id="front-news" class="section-head__title">{{ 'Dianie v obci'|t }}</h2>

@@ -69,6 +69,23 @@ Statický odkaz „Domov“ (`standard.front_page`) je vypnutý.
 - `web/.user.ini` zvyšuje limit nahrávania na 256 MB (na serveri bolo 2 MB). Websupport ho akceptuje (overené
   28. 10. 2026 vo formulári).
 
+## Zvoz odpadu
+
+- Termíny sa preberajú z iCal feedu obce (Moderné obce, kategória Odpad = 53):
+  `https://www.liptovskypeter.sk/kalendar/iCalFeed?category=53&ongoing=1`. Obec má v kalendári ešte kategóriu
+  Pozvánky (52), tá je takmer prázdna.
+- `WasteCalendar` (State `petrolejka_core.odpad`, **nie uzly**): `hook_cron` ho stiahne každých 6 h (automated_cron
+  beží každé 3 h). Pri chybe alebo prázdnom feede ostanú staré údaje. Cache tag `petrolejka_odpad` sa zneplatní pri
+  stiahnutí a pri zmene dňa (page_cache ignoruje max-age).
+- Feed obce má `TZID=Europe/Berlin` (rovnaký čas ako Bratislava, nevadí) a celodenné termíny zapisuje ako
+  00:00–23:59. Parser ich prevádza na dátumy (`start`, `end`, `time` = NULL). Druh odpadu (`type`) sa určuje
+  regexom z názvu (`WasteCalendar::TYPES`), farby sú v CSS `.waste--<typ>`.
+- `/odpad` (`WasteController::page`, šablóny `petrolejka-odpad` a `petrolejka-odpad-list`), blok s 3 najbližšími
+  termínmi na titulke (`#waste` vo `FrontController`) a vlastný feed `/odpad/kalendar.ics` s celodennými udalosťami
+  a pripomienkou o 18:00 deň vopred (`TRIGGER:-PT6H`). UID v ňom majú prefix `odpad-`, nemeniť ich.
+- Odkaz „Zvoz odpadu“ v päte vytvoril deploy hook `petrolejka_core_deploy_odpad()`. Ručné stiahnutie:
+  `drush php:eval '\Drupal\petrolejka_core\WasteCalendar::refresh();'`.
+
 ## Darovanie (Stripe + PAY by square)
 
 - **Hlavná možnosť je Stripe** (karta, Apple Pay, Google Pay) cez **Stripe Payment Links**: tlačidlá „Podporiť
